@@ -5,7 +5,7 @@ postgresql
 JSF
 jdk 1.8
 tomcat8.5.12
-putty version 0.68
+putty version 0.68 nur putty.exe
 git version 2.10.2
 VirtualBox
 Debian
