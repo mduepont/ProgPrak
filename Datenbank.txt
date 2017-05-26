@@ -1,4 +1,4 @@
-    DROP TABLE IF EXISTS Wunschliste;
+﻿     DROP TABLE IF EXISTS Wunschliste;
     DROP TABLE IF EXISTS Wunschlistenersteller;
     DROP TABLE IF EXISTS Desing;
     DROP TABLE IF EXISTS Wünsche;
@@ -9,62 +9,61 @@
    
    */
    CREATE TABLE Wunschliste(
-       ID_Wunschlistenersteller CHAR (5),
-       Name_Wunschliste TEXT,
-       ID_Wunschliste   CHAR (5),
-       Anlass TEXT,
-       Ablaufdatum CHAR (8),
-       Listenpassword CHAR(12),
-       Desing_ID CHAR (3),
-       Überraschungsmodus boolean NOT NULL, 
-       PRIMARY KEY (ID_Wunschliste,Desing_ID)
-       /*FOREIGN KEY ....REFERENCES ...(...)   -> verbindung zwischen den tabellen herstellen*/
+       id_Wunschlistenersteller integer ,
+       name_Wunschliste         text,
+       id_Wunschliste           integer PRIMARY KEY ,
+       anlass                   text,
+       ablaufdatum              date,
+       listenpassword           text,
+       desing_ID                integer,
+       uberraschungsmodus       boolean NOT NULL 
+       /*FOREIGN KEY () REFERENCES ()   -> verbindung zwischen den tabellen herstellen*/
    );
    
-  /* INSERT INTO Wunschliste (ID_Wunschlistenersteller, Name_Wunschliste,ID_Wunschliste, Anlass,Ablaufdatum,Listenpassword,Desing_ID,Überraschungsmodus)
+  /* INSERT INTO Wunschliste (id_Wunschlistenersteller, name_Wunschliste,id_Wunschliste,anlass,ablaufdatum,listenpassword,desing_ID,uberraschungsmodus)
            VALUES
            ()
            */
       CREATE TABLE Wunschlistenersteller(
-          Name_Wunschlistenersteller TEXT,
-          E_Mail TEXT,
-          ID_Wunschlistenersteller CHAR (5) PRIMARY KEY
+          name_Wunschlistenersteller text,
+          e_Mail                     text,
+          id_Wunschlistenersteller   integer PRIMARY KEY
           /*FOREIGN KEY ....REFERENCES ...(...)*/
       );
       
-      /* INSERT INTO Wunschlistenersteller (Name_Wunschlistenersteller,E_Mail,ID_Wunschlistenersteller)
+      /* INSERT INTO Wunschlistenersteller (name_Wunschlistenersteller,e_Mail,id_Wunschlistenersteller)
            VALUES
            ()
            */
       CREATE TABLE Desing(
-          Desing_ID CHAR(3) PRIMARY KEY,
-          Hintergrundfarbe TEXT,
-          Schriftfarbe TEXT,
-          Schriftart TEXT
+          desing_ID        integer PRIMARY KEY,
+          hintergrundfarbe text,
+          schriftfarbe     text,
+          schriftart       text
           /*FOREIGN KEY ....REFERENCES ...(...)*/
       );
-      /* INSERT INTO Desing (Desing_ID, Hintergrundfarbe, Schriftfarbe, Schriftart)
+      /* INSERT INTO Desing (desing_ID, hintergrundfarbe, schriftfarbe, schriftart)
            VALUES
            ()
            */
       CREATE TABLE Wünsche(
-          Name_Wunsch TEXT,
-          ID_Wunsch CHAR(5)PRIMARY KEY,
-          ID_Wunschliste CHAR (5),
-          Beschreibung TEXT,
-          LinkZuWunsch TEXT
+          name_Wunsch    text,
+          id_Wunsch      integer PRIMARY KEY,
+          id_Wunschliste integer,
+          beschreibung   text,
+          linkZuWunsch   text
           /*FOREIGN KEY ....REFERENCES ...(...)*/
       );
-      /* INSERT INTO Wünsche (Name_Wunsch, ID_Wunsch,ID_Wunschliste,Beschreibung,LinkZuWunsch)
+      /* INSERT INTO Wünsche (name_Wunsch, id_Wunsch,id_Wunschliste,beschreibung,linkZuWunsch)
            VALUES
            ()
            */
       CREATE TABLE Geschenk(
-          ID_Wunsch CHAR(5) PRIMARY KEY,
-          Name_Schenker TEXT 
+          id_Wunsch     integer PRIMARY KEY,
+          name_Schenker text 
           /*FOREIGN KEY ....REFERENCES ...(...)*/
       );
-      /* INSERT INTO Geschenk (ID_Wunsch,Name_Schenker)
+      /* INSERT INTO Geschenk (id_Wunsch,name_Schenker)
            VALUES
            ()
            */
