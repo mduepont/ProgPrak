@@ -1,71 +1,66 @@
-﻿     DROP TABLE IF EXISTS wunschliste;
-    DROP TABLE IF EXISTS wunschlistenersteller;
-    DROP TABLE IF EXISTS desing;
+﻿    DROP TABLE IF EXISTS anlass;
+	DROP TABLE IF EXISTS ersteller;
+	 DROP TABLE IF EXISTS desing;
+	DROP TABLE IF EXISTS wunschliste;
     DROP TABLE IF EXISTS wunsch;
     DROP TABLE IF EXISTS geschenk;
     
-   /* DROP DOMAIN IF EXISTS      ;  -> vorgegebene eingaben definieren
-      CREATE DOMAIN ..... AS ....;   -> inhaltliche eingaben
+	--Name der Datenbank ist wuenschdirwas
    
-   */
-   CREATE TABLE wunschliste(
-       id_wunschlistenersteller integer ,
-       name_wunschliste         text,
-       id_wunschliste           integer PRIMARY KEY ,
-       anlass                   text,
-       ablaufdatum              date,
-       listenpassword           text,
-       desing_id                integer,
-       uberraschungsmodus       boolean NOT NULL 
-       /*FOREIGN KEY () REFERENCES ()   -> verbindung zwischen den tabellen herstellen*/
-   );
+ CREATE TABLE anlass(
+		name_anlass text UNIQUE NOT NULL
+	);
    
-  /* INSERT INTO Wunschliste (id_Wunschlistenersteller, name_wunschliste,id_wunschliste,anlass,ablaufdatum,listenpassword,desing_id,uberraschungsmodus)
-           VALUES
-           ()
-           */
-      CREATE TABLE wunschlistenersteller(
-          name_wunschlistenersteller text,
-          e_mail                     text,
-          id_wunschlistenersteller   integer PRIMARY KEY
-          /*FOREIGN KEY ....REFERENCES ...(...)*/
+    CREATE TABLE ersteller(
+	  id_ersteller   serial PRIMARY KEY,
+      name_ersteller text NOT NULL,
+      email          text NOT NULL
       );
       
-      /* INSERT INTO wunschlistenersteller (name_wunschlistenersteller,e_mail,id_wunschlistenersteller)
-           VALUES
-           ()
-           */
-      CREATE TABLE desing(
-          desing_id        integer PRIMARY KEY,
-          hintergrundfarbe text,
-          schriftfarbe     text,
-          schriftart       text
-          /*FOREIGN KEY ....REFERENCES ...(...)*/
+	 CREATE TABLE design(
+         design_id        integer PRIMARY KEY,
+          hintergrundfarbe text NOT NULL,
+          schriftfarbe     text NOT NULL,
+          schriftart       text NOT NULL
       );
-      /* INSERT INTO desing (desing_id, hintergrundfarbe, schriftfarbe, schriftart)
-           VALUES
-           ()
-           */
+   
+    CREATE TABLE wunschliste(
+       id_wunschliste           serial PRIMARY KEY ,
+       id_ersteller 			integer NOT Null,
+       name_wunschliste         text NOT Null,
+       anlass                   text NOT Null,
+       ablaufdatum              date NOT Null,
+       listenpassword           text NOT Null,
+       design_id                integer NOT Null,
+       uberraschungsmodus       boolean NOT NULL,
+		FOREIGN KEY (id_ersteller)
+       REFERENCES ersteller(id_ersteller)
+       NOT DEFERRABLE 
+       INITIALLY IMMEDIATE,
+	   FOREIGN KEY (design_id)
+       REFERENCES design(design_id)
+       NOT DEFERRABLE 
+       INITIALLY IMMEDIATE,
+	   FOREIGN KEY (anlass)
+       REFERENCES anlass(name_anlass)
+       NOT DEFERRABLE 
+       INITIALLY IMMEDIATE
+   );
+   
+ 
       CREATE TABLE wunsch(
-          name_wunsch    text,
-          id_wunsch      integer PRIMARY KEY,
-          id_wunschliste integer,
-          beschreibung   text,
-          link_wunsch   text
-          /*FOREIGN KEY ....REFERENCES ...(...)*/
+          id_wunsch      serial PRIMARY KEY,
+		  name_wunsch    text NOT NULL,
+          id_wunschliste integer NOT NULL,
+          beschreibung   text NOT NULL,
+          link_wunsch   text NOT NULL,
+	  FOREIGN KEY (id_wunschliste)
+      REFERENCES wunschliste(id_wunschliste)
+      NOT DEFERRABLE 
+      INITIALLY IMMEDIATE
       );
-      /* INSERT INTO wunsch (name_wunsch, id_wunsch,id_wunschliste,beschreibung,link_wunsch)
-           VALUES
-           ()
-           */
+     
       CREATE TABLE geschenk(
           id_wunsch     integer PRIMARY KEY,
-          name_schenker text 
-          /*FOREIGN KEY ....REFERENCES ...(...)*/
+          name_schenker text NOT NULL 
       );
-      /* INSERT INTO geschenk (id_wunsch,name_schenker)
-           VALUES
-           ()
-           */
-         
-       commit;
