@@ -1,0 +1,25 @@
+
+--eventuell einzeln ausführen und Übereinstimmung mit generierten IDs beachten!
+
+TRUNCATE anlass, design, ersteller, geschenk, wunschliste, wunsch;
+
+INSERT INTO anlass (name_anlass) --anpassen an unere Anlässe!
+	VALUES ('Geburtstag'), ('Hochzeit'), ('Konfirmation'), ('Taufe');
+	
+INSERT INTO design ( design_id, hintergrundfarbe, schriftfarbe, schriftart)
+		VALUES ('1', 'weiss', 'schwarz', 'arial');
+	
+INSERT INTO ersteller (name_ersteller, email) 
+	VALUES ('Sabrina', 'sabby678@web.de'), ('Anton', 'ichmaghunde@gmx.de'), ('Isa', 'isa@googlemail.de');
+	
+INSERT INTO wunschliste (id_ersteller, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus)
+	VALUES ('1', 'Mein Hochzeit', 'Hochzeit', '2017-09-21', '6gH9ii', '1', 'false'), 
+			('2', '18. Geburtstag', 'Geburtstag', '2017-07-03', 'bBaA89cC', '1', 'false'), 
+			('3', 'Taufe meiner Tochter', 'Taufe', '2017-08-18', 'abc123AB', '1', 'true');
+			
+INSERT INTO wunsch (name_wunsch, id_wunschliste, beschreibung, link_wunsch)
+	VALUES ('Urlaub auf Spanien', '2', 'none', 'none'),
+	('Schuhe von Adidas', '2', 'In schwarz silber, Groesse 44', 'www.adidas.de/artikel/schuhe/Sneakers-black-fancy'),
+	('Sonnenbrille', '2', 'Marke xy', 'none'), ('Vodka', '2', 'none', 'none'),
+	('Toaster', '1', 'Edelstahlt und von WMF', 'www.wmf.de/sortiment/Toaster-Edelstahl'),
+	('Tragetuch', '3', 'none', 'none');
