@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ListeErstellen</from-outcome>
+			<to-view-id>listeErstellen.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>demo</from-outcome>
+			<to-view-id>demo.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listeBearbeiten</from-outcome>
+			<to-view-id>listeBearbeiten.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>impressum</from-outcome>
+			<to-view-id>impressum.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>datenschutz</from-outcome>
+			<to-view-id>datenschutz.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>kontakt</from-outcome>
+			<to-view-id>kontakt.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>geburt</from-outcome>
+			<to-view-id>geburt.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>geburtstag</from-outcome>
+			<to-view-id>geburtstag.xhtml</to-view-id>
+		</navigation-case>			
+	</navigation-rule>
+	
+	<managed-bean>
+		<managed-bean-name>CommonTemplate</managed-bean-name>
+		<managed-bean-class>controller.CommonTemplate</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+		
+</faces-config>

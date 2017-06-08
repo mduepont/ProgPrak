@@ -1,0 +1,151 @@
+@CHARSET "UTF-8";
+
+/* ----------------------------- mobile version ------------------------*/
+@media sceen and (min-width 768px){
+    .maincontainer{
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+}
+@media (min-width: 992px){
+    .container {
+        width: 970px;
+    }
+    .category{
+    	width: 970px;
+    }
+}
+@media (min-width: 768px){
+    .container {
+        width: 750px;
+    }
+    .category {
+        width: 750px;
+    }
+}
+
+/* ----------------------------- general --------------------------*/
+body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    display: block;
+    margin: 0px;
+    font-family: "Helvetica Neu", Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    font:inherit;
+    vertical-align: baseline;
+    line-height: 1.4.28571429;
+    background-color: #fff;
+}
+h1, .h1{
+    line-height: 1;
+    color: ghostwhite;
+}
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+*, *::before, *::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.icons{
+	width: 45px;
+	height: 45px;
+	margin: 10px;
+	box-shadow: 3px 3px 5px #888888;
+	border-radius: 10px;
+	
+}
+/* ----------------------------- head container ------------------------*/
+.maincontainer{
+    z-index: 2;
+    padding: 50px;
+    margin-bottom: 0px;
+    font-size: 21px;
+    font-weight: 200;  
+    line-height: 2.1428571435;
+    width: 100%;
+    color: ghostwhite;
+    text-shadow:  1px  1px 2px saddlebrown,
+                  1px -1px 2px saddlebrown,
+                 -1px  1px 2px saddlebrown,
+                 -1px -1px 2px saddlebrown;
+   
+    background-image: url("images/hintergrund1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover; 
+}
+.maincontainer .container {
+    width: 100%;
+    height: 17em;
+}
+.container {
+    padding-top: 0px;
+    padding-right: 25px;
+    padding-left: 25px;
+    margin-right: auto;
+    margin-left: auto;
+}
+div {
+    display: block;
+}
+
+.category{
+	width: 100%;
+	background-color: lightgrey;
+	margin-left: 0;
+	padding-left: 30px;
+	padding-rigth: 30px;
+}
+
+
+/* ----------------------------- button in head container ------------------------*/
+/*
+a {
+    color: sandybrown;
+    text-decoration: none;
+    background: transparent;
+}
+.btn-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
+.btn-default {
+    color: #333333;
+    background-color: #ffffff;
+    border-color: #cccccc;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 19px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+
+

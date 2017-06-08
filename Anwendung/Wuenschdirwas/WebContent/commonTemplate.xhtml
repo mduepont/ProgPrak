@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet name="style.css" library="css" />
+	<h:outputStylesheet name="contentstyle.css" library="css" />
+	<h:outputStylesheet name="footerstyle.css" library="css" />
+	<h:outputStylesheet name="navigationstyle.css" library="css" />
+	<title><ui:insert name="title"></ui:insert></title>
+</h:head>
+
+<h:body> 
+	<div id="page">
+		
+		<div id="header" class="header">
+			<ui:insert name="header">
+				<ui:include src="./WEB-INF/header.xhtml" />
+			</ui:insert>
+		</div>
+		
+		<div class="maincontainer">
+        	<div class="container">
+        		<br />
+            	<h:outputText value="Wünsch dir was"></h:outputText>
+            	<br />
+            	<h:outputText value="text text text text text text "></h:outputText>
+        	</div>
+        </div>
+        
+        <div class="category">
+        
+        	<h:outputLink value="geburt.xhtml">
+				<h:graphicImage class="icons" library="images" name="geburt.png" />
+			</h:outputLink>
+        	<h:outputLink value="geburtstag.xhtml">
+				<h:graphicImage class="icons" library="images" name="geburtstag.png" />
+			</h:outputLink>
+			<h:outputLink value="jubilaeum.xhtml">
+				<h:graphicImage class="icons" library="images" name="jubilaeum.png" />
+			</h:outputLink>
+			<h:outputLink value="taufe.xhtml">
+				<h:graphicImage class="icons" library="images" name="taufe.png" />
+			</h:outputLink>
+			<h:outputLink value="kommunion.xhtml">
+				<h:graphicImage class="icons" library="images" name="kommunion.png" />
+			</h:outputLink>
+			<h:outputLink value="konfirmation.xhtml">
+				<h:graphicImage class="icons" library="images" name="konfirmation.png" />
+			</h:outputLink>
+			<h:outputLink value="henna.xhtml">
+				<h:graphicImage class="icons" library="images" name="henna.png" />
+			</h:outputLink>
+			<h:outputLink value="hochzeit.xhtml">
+				<h:graphicImage class="icons" library="images" name="hochzeit.png" />
+			</h:outputLink>
+			<h:outputLink value="weihnachten.xhtml">
+				<h:graphicImage class="icons" library="images" name="weihnachten.png" />
+			</h:outputLink>
+			<h:outputLink value="zuckerfest.xhtml">
+				<h:graphicImage class="icons" library="images" name="zuckerfest.png" />
+			</h:outputLink>
+        </div>
+		
+		<div id="content" class="content">
+			<div class="contentcontainer">
+    			<div class="inner">
+					<ui:insert name="content">
+						<ui:include src="./WEB-INF/content.xhtml" />
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+		
+		<div id="footer" class="footer">
+			<ui:insert name="footer">
+				<ui:include src="./WEB-INF/footer.xhtml" />
+			</ui:insert>
+		</div>
+	</div>
+</h:body> 
+</html>

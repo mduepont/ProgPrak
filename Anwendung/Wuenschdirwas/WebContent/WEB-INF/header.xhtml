@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+<div class="headcontainer">
+			    <div class="topnav" id="myTopnav">
+			           	<h:form>
+			            	<a><h:link value="Demo" outcome="demo"/></a>
+			            	<a><h:link value="Liste erstellen" outcome="listeErstellen" /></a>
+			            	<a><h:link value="Liste bearbeiten" outcome="listeBearbeiten" /></a>
+			            	<a href="javascript:void(0);" style="font-size:20px;" class="icon" onclick="myFunction()">&#9776;</a>
+			           	</h:form>
+			           				
+			           	
+			           					           			     
+			     		<script>
+							function myFunction() {
+							    var x = document.getElementById("myTopnav");
+							    if (x.className === "topnav") {
+							        x.className += " responsive";
+							    } else {
+							        x.className = "topnav";
+							    }
+							}
+						</script>
+			    </div>
+			</div>
+			
+		
+		
+</body>
+</html>
