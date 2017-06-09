@@ -54,8 +54,6 @@ public class DatenbankIO {
 	 */
 	public DatenbankIO(){
 		super();
-//		getProperties();
-//		getConnection();
 	}
 	
 	public Driver getTreiber() {

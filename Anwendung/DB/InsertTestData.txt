@@ -1,10 +1,11 @@
 
 --eventuell einzeln ausführen und Übereinstimmung mit generierten IDs beachten!
+--kategorien: Geburtstag, Geburt, Jubiläum, Taufe, Kommunion, Konfirmation, Hennaabend, Hochzeit, Weihnachten, Zuckerfest
 
 TRUNCATE anlass, design, ersteller, geschenk, wunschliste, wunsch;
 
 INSERT INTO anlass (name_anlass) --anpassen an unere Anlässe!
-	VALUES ('Geburtstag'), ('Hochzeit'), ('Konfirmation'), ('Taufe');
+	VALUES ('Geburtstag'), ('Hochzeit'), ('Konfirmation'), ('Taufe'), ('Geburt'), ('Jubiläum'), ('Kommunion'), ('Hennaabend'), ('Weihnachten'), ('Zuckerfest');
 	
 INSERT INTO design ( design_id, hintergrundfarbe, schriftfarbe, schriftart)
 		VALUES ('1', 'weiss', 'schwarz', 'arial');

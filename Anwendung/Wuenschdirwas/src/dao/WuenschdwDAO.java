@@ -5,8 +5,8 @@ package dao;
 
 import java.util.ArrayList;
 
-import beans.Wuenschliste;
-import beans.WunschlisteErsteller;
+import daten.Wuenschliste;
+import daten.WunschlisteErsteller;
 
 public interface WuenschdwDAO {
 
