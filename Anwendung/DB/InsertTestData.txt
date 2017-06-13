@@ -13,10 +13,10 @@ INSERT INTO design ( design_id, hintergrundfarbe, schriftfarbe, schriftart)
 INSERT INTO ersteller (name_ersteller, email) 
 	VALUES ('Sabrina', 'sabby678@web.de'), ('Anton', 'ichmaghunde@gmx.de'), ('Isa', 'isa@googlemail.de');
 	
-INSERT INTO wunschliste (id_ersteller, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus)
-	VALUES ('1', 'Mein Hochzeit', 'Hochzeit', '2017-09-21', '6gH9ii', '1', 'false'), 
-			('2', '18. Geburtstag', 'Geburtstag', '2017-07-03', 'bBaA89cC', '1', 'false'), 
-			('3', 'Taufe meiner Tochter', 'Taufe', '2017-08-18', 'abc123AB', '1', 'true');
+INSERT INTO wunschliste (id_ersteller, id_zugriff, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus)
+	VALUES ('1', '24876-f8wg-3247k', 'Mein Hochzeit', 'Hochzeit', '2017-09-21', '6gH9ii', '1', 'false'), 
+			('2', 'fd876g-87gas5-87s8696', '18. Geburtstag', 'Geburtstag', '2017-07-03', 'bBaA89cC', '1', 'false'), 
+			('3', '546gvg452-43g326-980h76', 'Taufe meiner Tochter', 'Taufe', '2017-08-18', 'abc123AB', '1', 'true');
 			
 INSERT INTO wunsch (name_wunsch, id_wunschliste, beschreibung, link_wunsch)
 	VALUES ('Urlaub auf Spanien', '2', 'none', 'none'),

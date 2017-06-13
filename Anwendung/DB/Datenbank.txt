@@ -1,11 +1,15 @@
-﻿    DROP TABLE IF EXISTS anlass;
-	DROP TABLE IF EXISTS ersteller;
-	 DROP TABLE IF EXISTS desing;
-	DROP TABLE IF EXISTS wunschliste;
-    DROP TABLE IF EXISTS wunsch;
-    DROP TABLE IF EXISTS geschenk;
+﻿  	--Name der Datenbank ist wuenschdirwas
+	
+   
+DROP TABLE IF EXISTS wunsch;
+DROP TABLE IF EXISTS wunschliste;
+DROP TABLE IF EXISTS ersteller;
+DROP TABLE IF EXISTS anlass;
+DROP TABLE IF EXISTS design;
+DROP TABLE IF EXISTS geschenk;
     
 	--Name der Datenbank ist wuenschdirwas
+	
    
  CREATE TABLE anlass(
 		name_anlass text UNIQUE NOT NULL
@@ -26,11 +30,12 @@
    
     CREATE TABLE wunschliste(
        id_wunschliste           serial PRIMARY KEY ,
+	   id_zugriff				text NOT NULL,
        id_ersteller 			integer NOT Null,
        name_wunschliste         text NOT Null,
        anlass                   text NOT Null,
        ablaufdatum              date NOT Null,
-       listenpassword           text NOT Null,
+       listenpasswort           text NOT Null,
        design_id                integer NOT Null,
        uberraschungsmodus       boolean NOT NULL,
 		FOREIGN KEY (id_ersteller)
