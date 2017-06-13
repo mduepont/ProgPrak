@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import daten.Wuensche;
 import daten.Wuenschliste;
@@ -155,28 +156,39 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 		return erfolgreich;
 	}
 
+	private String zugriffsIdGenerieren(){
+		String id = null;
+		UUID identifizierer = UUID.randomUUID();
+		id = identifizierer.toString();
+		return id;
+	}
+	
 	@Override
 	//Vorbedingung: erstellerid muss gesetzt sein!
 	/**
 	 * Speichert eine uebergebene Wunschliste in die Datenbank
 	 * @param liste
+	 * Dabei wird eine UUID für den Zugriff via link generiert @see zugriffsIdGenerieren()
 	 * Nutzt dabei die Methode @see speichernUndIdHolenWuensche(wuensche)
 	 * Liefert die ID der gespeicherten Liste zurueck
 	 */
 	public int speichereWunschliste(Wuenschliste liste) {
 		int id = -1;
+		String zugriffsId = zugriffsIdGenerieren();
+		liste.setZugriffsId(zugriffsId);
 //		id_ersteller, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus
 		try {
 			PreparedStatement stmspeichernliste =
-					getVerbindung().prepareStatement("INSERT INTO wunschliste(id_ersteller, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+					getVerbindung().prepareStatement("INSERT INTO wunschliste(id_ersteller, id_zugriff, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus) VALUES (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			stmspeichernliste.setInt(1, liste.getIdErsteller());
-			stmspeichernliste.setString(2, liste.getName());
-			stmspeichernliste.setString(3, liste.getAnlass());
+			stmspeichernliste.setString(2, liste.getZugriffsId());
+			stmspeichernliste.setString(3, liste.getName());
+			stmspeichernliste.setString(4, liste.getAnlass());
 			Date date = Date.valueOf(liste.getDatum());
-			stmspeichernliste.setDate(4, date);
-			stmspeichernliste.setString(5, liste.getListepwd());
-			stmspeichernliste.setInt(6, liste.getDesignid());
-			stmspeichernliste.setBoolean(7, liste.isUeberraschung());
+			stmspeichernliste.setDate(5, date);
+			stmspeichernliste.setString(6, liste.getListepwd());
+			stmspeichernliste.setInt(7, liste.getDesignid());
+			stmspeichernliste.setBoolean(8, liste.isUeberraschung());
 			int geschrieben = stmspeichernliste.executeUpdate();
 			if(geschrieben == 0){
 				throw new SQLException("keine Liste gespeichert");
@@ -208,6 +220,8 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	 * @param wuensche
 	 * Die Methode @see standardWerteWunsch(wunsch) wird verwendet um leere Attribute
 	 * eines Wunsches mit Werten zu füllen
+	 * Die Methode @see speichereWunsch(liteId, wunsch) wird verwendet um einzelne
+	 * Wünsche zu speichern
 	 */
 	private ArrayList<Wuensche> speichernUndIdHolenWuensche(int listeID, ArrayList<Wuensche> wuensche){
 		ArrayList<Wuensche> wuenscheNeu = null;
@@ -215,7 +229,8 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 		//wunsch speichern und id setzen!
 //		name_wunsch, id_wunsch, beschreibung, link_wunsch
 		for(Wuensche w: wuensche){
-			int id = -1;
+			w = speichereWunsch(listeID, w);
+			/*int id = -1;
 			w = standardWerteWunsch(w);
 				try {
 					PreparedStatement stmspeichernwunsch =
@@ -242,7 +257,7 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 				} catch (SQLException e) {
 					System.out.println("WuenschdwDAOImple/speichernWuensche(id, wuensche): ");
 					e.printStackTrace();
-				}
+				}*/
 		}
 		if(speicher.size() > 0){
 			wuenscheNeu = speicher;
@@ -256,13 +271,27 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	 * @return Wuensche w, der Wunsch
 	 */
 	private Wuensche standardWerteWunsch(Wuensche w){
-		if(w.getBeschreibung() == null){
-			w.setBeschreibung("<keine>");
+		if(istLeer(w.getBeschreibung())){
+			w.setBeschreibung("keine");
 		}
-		if(w.getLink() == null){
-			w.setLink("<keiner>");
+		if(istLeer(w.getBeschreibung())){
+			w.setLink("keiner");
 		}
+		System.out.println(w.toString());
 		return w;
+	}
+/**
+ * Testet ob ein uebergebener String leer ist
+ * @param str
+ * @return leer oder nicht
+ */
+	public boolean istLeer(String str){
+		 if (str == null || str.length() == 0){
+	            return true;
+		 }
+	     else{
+	            return false;
+	     }
 	}
 	
 	@Override
@@ -367,15 +396,44 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	}
 
 	@Override
-	public int speichereWunsch(int idListe) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Wuensche speichereWunsch(int idListe, Wuensche wunsch) {
+		int id = -1;
+		wunsch = standardWerteWunsch(wunsch);
+		System.out.println("speicherWunsch: "+wunsch.toString());
+			try {
+				PreparedStatement stmspeichernwunsch =
+						getVerbindung().prepareStatement("INSERT INTO wunsch(name_wunsch, id_wunschliste, beschreibung, link_wunsch) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+				stmspeichernwunsch.setString(1, wunsch.getName());
+				stmspeichernwunsch.setInt(2, idListe);
+				stmspeichernwunsch.setString(3, wunsch.getBeschreibung());
+				stmspeichernwunsch.setString(4, wunsch.getLink());
+				System.out.println(stmspeichernwunsch.toString());
+				int geschrieben = stmspeichernwunsch.executeUpdate();
+				if(geschrieben == 0){
+					throw new SQLException("Kein Wunsch geschrieben");
+				}
+				try(ResultSet setid = stmspeichernwunsch.getGeneratedKeys()){
+					if(setid.next()){
+						id = setid.getInt(1);
+						wunsch.setId(id);
+					}
+					else{
+						throw new SQLException("Keine ID erhalten");
+					}
+				}
+				stmspeichernwunsch.close();
+			} catch (SQLException e) {
+				System.out.println("WuenschdwDAOImple/speichereWunsch(idliste, wunsch): ");
+				e.printStackTrace();
+			}
+		return wunsch;
 	}
 
 	@Override
-	public boolean aendereWunsch(int idWunsch) {
+	public Wuensche aendereWunsch(int idWunsch, Wuensche wunsch) {
+		
 		// TODO Auto-generated method stub
-		return false;
+		return wunsch;
 	}
 
 	@Override

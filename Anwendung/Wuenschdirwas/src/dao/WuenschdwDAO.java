@@ -5,6 +5,7 @@ package dao;
 
 import java.util.ArrayList;
 
+import daten.Wuensche;
 import daten.Wuenschliste;
 import daten.WunschlisteErsteller;
 
@@ -12,8 +13,8 @@ public interface WuenschdwDAO {
 
 	public ArrayList<String> anlaesseLaden(); 
 	
-	public int speichereWunsch(int idListe); //TODO
-	public boolean aendereWunsch(int idWunsch); //TODO
+	public Wuensche speichereWunsch(int idListe, Wuensche wunsch); 
+	public Wuensche aendereWunsch(int idWunsch, Wuensche wunsch); //TODO
 	public boolean loescheWunsch(int idWunsch); //TODO
 	
 //	public ArrayList<Design> designsLaden();  

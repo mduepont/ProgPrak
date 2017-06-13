@@ -56,7 +56,7 @@ public class DaoTest {
 		wl.setAnlass("Konfirmation");
 		LocalDate date = LocalDate.of(2017, 12, 3);
 		wl.setDatum(date);
-		wl.setIdErsteller(7);
+		wl.setIdErsteller(3);
 		wl.setListepwd("123bFd");
 		wl.setName("Meine Konfirmation");
 		Wuensche w = new Wuensche();
@@ -72,6 +72,30 @@ public class DaoTest {
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
 	
+//	@Ignore
+	@Test
+	public void testSpeichernListeII(){
+		Wuenschliste wl = new Wuenschliste();
+		wl.setAnlass("Jubiläum");
+		LocalDate date = LocalDate.of(2018, 05, 01);
+		wl.setDatum(date);
+		wl.setIdErsteller(1);
+		wl.setListepwd("jifk5B");
+		wl.setName("25. Jubiläum meiner Firma LatzhosenKG");
+		Wuensche w = new Wuensche();
+		w.setName("Gemälde");
+		Wuensche w2 = new Wuensche();
+		w2.setName("Teppich");
+		ArrayList<Wuensche> wuensche = new ArrayList<Wuensche>();
+		wuensche.add(w2);
+		wuensche.add(w);
+		wl.setWuensche(wuensche);
+		int id = WuenschdwDAOImple.getInstance().speichereWunschliste(wl);
+		assertFalse(id == -1);
+		System.out.println(id);
+		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
+	}
+	
 	@Ignore
 	@Test
 	public void testLadenWunschlisteID(){
@@ -82,7 +106,7 @@ public class DaoTest {
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
 	
-//	@Ignore
+	@Ignore
 	@Test
 	public void testLadenAnlaesse(){
 		ArrayList<String> anlaesse = new ArrayList<String>();
