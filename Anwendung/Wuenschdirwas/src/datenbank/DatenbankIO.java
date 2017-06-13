@@ -10,6 +10,7 @@ package datenbank;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -115,9 +116,15 @@ public class DatenbankIO {
 	 */
 	public void getProperties() {
         Properties properties = new Properties();
-         File propertiesFile = new File("resources/dbaccess.properties"); 
+        try {
+			properties.load(getClass().getClassLoader().getResourceAsStream("dbzugang.properties"));
+		} catch (Exception e1) {
+			System.out.println("DatenbankIO/getProperties(): ");
+			e1.printStackTrace();
+		}
+//         File propertiesFile = new File("resources/dbaccess.properties"); 
         //File propertiesFile = new File(propFile);
-        if(propertiesFile.exists()){
+       /* if(propertiesFile.exists()){
         	try{
 	          BufferedInputStream bis = new BufferedInputStream(new FileInputStream(propertiesFile));
 	          properties.load(bis);
@@ -126,7 +133,7 @@ public class DatenbankIO {
         		System.out.println("DatabaseIO/ getProperties(): ");
         		e.printStackTrace();
         	}
-        }
+        }*/
         dbadresse   = properties.getProperty("database");
     	dbnutzer     = properties.getProperty("dbuser");
     	dbpasswort = properties.getProperty("dbpassword");
