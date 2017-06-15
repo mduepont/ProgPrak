@@ -2,10 +2,10 @@ package daten;
 
 public class Wuensche {
 	
-	private String name;
-	private String beschreibung;
-	private String link;
-	private int id;
+	private String name = null;
+	private String beschreibung = null;
+	private String link = null;
+	private int id = -1;
 
 	
 	public Wuensche(String name,String beschreibung, String link){

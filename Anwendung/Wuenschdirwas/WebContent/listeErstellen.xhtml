@@ -8,7 +8,12 @@
 
 <ui:composition template="commonTemplate.xhtml">
 	<ui:define name="content">
+	<h:form>
 		<h:outputText value="Liste erstellen"></h:outputText>
+		<h:outputLabel for="titel" value="Titel: " />
+		<h:inputText id="titel" value="#{erstellen.titel}"></h:inputText>
+		<h:commandButton value="senden" action="#{erstellen.anlegen}"/>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

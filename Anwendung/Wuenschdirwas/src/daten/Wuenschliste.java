@@ -21,6 +21,7 @@ public class Wuenschliste {
 	private String listepwd;
 	private int designid = 1;
 	private boolean ueberraschung = false;
+	private String zugriffsId;
 	private ArrayList<Wuensche> wuensche;
 	private String regEx = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{5,8})"; 
 	
@@ -43,6 +44,18 @@ public class Wuenschliste {
 
 	public Wuenschliste() {
 		super();
+	}
+
+
+
+	public String getZugriffsId() {
+		return zugriffsId;
+	}
+
+
+
+	public void setZugriffsId(String zugriffsId) {
+		this.zugriffsId = zugriffsId;
 	}
 
 
@@ -161,6 +174,7 @@ public class Wuenschliste {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + (ueberraschung ? 1231 : 1237);
 		result = prime * result + ((wuensche == null) ? 0 : wuensche.hashCode());
+		result = prime * result + ((zugriffsId == null) ? 0 : zugriffsId.hashCode());
 		return result;
 	}
 
@@ -208,6 +222,11 @@ public class Wuenschliste {
 				return false;
 		} else if (!wuensche.equals(other.wuensche))
 			return false;
+		if (zugriffsId == null) {
+			if (other.zugriffsId != null)
+				return false;
+		} else if (!zugriffsId.equals(other.zugriffsId))
+			return false;
 		return true;
 	}
 
@@ -217,8 +236,8 @@ public class Wuenschliste {
 	public String toString() {
 		return "Wuenschliste [idErsteller=" + idErsteller + ", name=" + name + ", idListe=" + idListe + ", anlass="
 				+ anlass + ", datum=" + datum + ", listepwd=" + listepwd + ", designid=" + designid + ", ueberraschung="
-				+ ueberraschung + ", wuensche=" + wuensche + "]";
+				+ ueberraschung + ", zugriffsId=" + zugriffsId + ", wuensche=" + wuensche + "]";
 	}
-	
-	
+
+
 }
