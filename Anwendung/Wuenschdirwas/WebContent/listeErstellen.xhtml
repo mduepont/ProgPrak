@@ -8,11 +8,29 @@
 
 <ui:composition template="commonTemplate.xhtml">
 	<ui:define name="content">
-	<h:form>
-		<h:outputText value="Liste erstellen"></h:outputText>
-		<h:outputLabel for="titel" value="Titel: " />
-		<h:inputText id="titel" value="#{erstellen.titel}"></h:inputText>
-		<h:commandButton value="senden" action="#{erstellen.anlegen}"/>
+		<h:form>
+			<h:outputText value="Liste erstellen"></h:outputText> <br/>
+			
+			<h:outputLabel for="titel" value="Titel: "/>
+			<h:inputText id="titel" value="#{erstellen.titel}" required="true" >
+				<f:validateLength minimum="3" maximum="53"></f:validateLength>
+				<!-- Titel muss mit Buchstaben beginnen -->
+				<f:validateRegex pattern="[A-ZÖÜÄ]+.+" />
+			</h:inputText><br/>
+			
+			<h:outputLabel for="anlassselect" value="Anlass:" />
+			<h:selectOneMenu value="#{erstellen.anlass}" required="true" id="anlassselect">
+				<f:selectItems value="#{erstellen.anlaesse}"/>
+			</h:selectOneMenu><br/>
+			
+			
+			<h:outputLabel for="datum" value="Ablaufdatum:	" />
+			<h:inputText id="datum" value="#{erstellen.datum}"  validator="#{erstellen.validateAblaufdatum}" required="true">
+				<f:convertDateTime pattern="dd.MM.yyyy" />
+			</h:inputText><br/>
+		
+			<h:commandButton value="anlegen" action="#{erstellen.anlegen}"/>
+			<h:messages showDetail="true" />
 		</h:form>
 	</ui:define>
 </ui:composition>
