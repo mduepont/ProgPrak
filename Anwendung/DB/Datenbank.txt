@@ -59,6 +59,7 @@ DROP TABLE IF EXISTS geschenk;
           id_wunschliste integer NOT NULL,
           beschreibung   text NOT NULL,
           link_wunsch   text NOT NULL,
+	  schenker	text NOT NULL,
 	  FOREIGN KEY (id_wunschliste)
       REFERENCES wunschliste(id_wunschliste)
       NOT DEFERRABLE 

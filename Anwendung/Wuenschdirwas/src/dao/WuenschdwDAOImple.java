@@ -195,6 +195,7 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 			}try(ResultSet setid = stmspeichernliste.getGeneratedKeys()){
 				if(setid.next()){
 					id = setid.getInt(1);
+//					liste.setIdListe(id); ???
 					liste.setWuensche(speichernUndIdHolenWuensche(id, liste.getWuensche()));
 				}
 				else{
@@ -271,13 +272,17 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	 * @return Wuensche w, der Wunsch
 	 */
 	private Wuensche standardWerteWunsch(Wuensche w){
+		System.out.println("standardWerte(wunsch) "+w.toString());
 		if(istLeer(w.getBeschreibung())){
 			w.setBeschreibung("keine");
 		}
-		if(istLeer(w.getBeschreibung())){
+		if(istLeer(w.getLink())){
 			w.setLink("keiner");
 		}
-		System.out.println(w.toString());
+		if(istLeer(w.getSchenker())){
+			w.setSchenker("frei");
+		}
+		System.out.println(w.toString()+" nachher");
 		return w;
 	}
 /**
@@ -347,6 +352,7 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 				w.setName(setwuensche.getString(2));
 				w.setBeschreibung(setwuensche.getString(4));
 				w.setLink(setwuensche.getString(5));
+				w.setSchenker(setwuensche.getString(6));
 				wuensche.add(w);
 			}
 			stmladenwuensche.close();
@@ -402,11 +408,12 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 		System.out.println("speicherWunsch: "+wunsch.toString());
 			try {
 				PreparedStatement stmspeichernwunsch =
-						getVerbindung().prepareStatement("INSERT INTO wunsch(name_wunsch, id_wunschliste, beschreibung, link_wunsch) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+						getVerbindung().prepareStatement("INSERT INTO wunsch(name_wunsch, id_wunschliste, beschreibung, link_wunsch, schenker) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 				stmspeichernwunsch.setString(1, wunsch.getName());
 				stmspeichernwunsch.setInt(2, idListe);
 				stmspeichernwunsch.setString(3, wunsch.getBeschreibung());
 				stmspeichernwunsch.setString(4, wunsch.getLink());
+				stmspeichernwunsch.setString(5, wunsch.getSchenker());
 				System.out.println(stmspeichernwunsch.toString());
 				int geschrieben = stmspeichernwunsch.executeUpdate();
 				if(geschrieben == 0){

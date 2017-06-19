@@ -18,9 +18,9 @@ INSERT INTO wunschliste (id_ersteller, id_zugriff, name_wunschliste, anlass, abl
 			('2', 'fd876g-87gas5-87s8696', '18. Geburtstag', 'Geburtstag', '2017-07-03', 'bBaA89cC', '1', 'false'), 
 			('3', '546gvg452-43g326-980h76', 'Taufe meiner Tochter', 'Taufe', '2017-08-18', 'abc123AB', '1', 'true');
 			
-INSERT INTO wunsch (name_wunsch, id_wunschliste, beschreibung, link_wunsch)
-	VALUES ('Urlaub auf Spanien', '2', 'none', 'none'),
-	('Schuhe von Adidas', '2', 'In schwarz silber, Groesse 44', 'www.adidas.de/artikel/schuhe/Sneakers-black-fancy'),
-	('Sonnenbrille', '2', 'Marke xy', 'none'), ('Vodka', '2', 'none', 'none'),
-	('Toaster', '1', 'Edelstahlt und von WMF', 'www.wmf.de/sortiment/Toaster-Edelstahl'),
-	('Tragetuch', '3', 'none', 'none');
+INSERT INTO wunsch (name_wunsch, id_wunschliste, beschreibung, link_wunsch, schenker)
+	VALUES ('Urlaub auf Spanien', '2', 'keine', 'keiner', 'frei'),
+	('Schuhe von Adidas', '2', 'In schwarz silber, Groesse 44', 'www.adidas.de/artikel/schuhe/Sneakers-black-fancy', 'Emil'),
+	('Sonnenbrille', '2', 'Marke xy', 'keiner', 'Irina'), ('Vodka', '2', 'keine', 'keiner', 'Marcel'),
+	('Toaster', '1', 'Edelstahlt und von WMF', 'www.wmf.de/sortiment/Toaster-Edelstahl', 'frei'),
+	('Tragetuch', '3', 'keine', 'keiner', 'Gabi und Ludwig');
