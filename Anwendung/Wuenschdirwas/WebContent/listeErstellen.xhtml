@@ -7,13 +7,52 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="commonTemplate.xhtml">
+	
 	<ui:define name="content">
-	<h:form>
-		<h:outputText value="Liste erstellen"></h:outputText>
-		<h:outputLabel for="titel" value="Titel: " />
-		<h:inputText id="titel" value="#{erstellen.titel}"></h:inputText>
-		<h:commandButton value="senden" action="#{erstellen.anlegen}"/>
-		</h:form>
+			
+		hier sollen nun die Wünsche eingefügt werden ;)
+		
+		<h:form>
+									<ul>
+										
+										<li>
+											<dl>
+												<dt>
+													<h:outputLabel value="Titel eingeben: " for="titel" />
+												</dt>
+												<h:inputText 
+													id="titel" 
+													value="#{listeErstellen.titel}"  
+													required="true" 
+                									requiredMessage="Du musst einen Titel eingeben"></h:inputText>
+											</dl>
+										</li>
+										
+										<li>	
+											<dl>
+												<dt>
+													<h:outputLabel value="Anlass wählen: " for="wahl" />
+												</dt>
+												<h:selectOneMenu id="wahl" value="#{listeErstellen.anlass}">
+													<f:selectItems value="#{listeErstellen.anlaesse}"></f:selectItems>
+												</h:selectOneMenu>
+											</dl>
+										</li>
+										
+										<li>
+											<dl>
+												<dt>
+													<h:outputLabel value="Ablaufdatum angeben: " for="datum" />
+												</dt>
+												<h:inputText id="datum" value="#{listeErstellen.datum}" />
+											</dl>
+										</li>
+										<li>									
+										
+										</li>
+									</ul>
+								</h:form>	
 	</ui:define>
+	
 </ui:composition>
 </html>

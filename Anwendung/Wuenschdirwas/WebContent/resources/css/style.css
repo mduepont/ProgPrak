@@ -1,54 +1,41 @@
 @CHARSET "UTF-8";
 
-/* ----------------------------- mobile version ------------------------*/
-@media sceen and (min-width 768px){
-    .maincontainer{
-        padding-top: 48px;
-        padding-bottom: 48px;
-    }
-}
-@media (min-width: 992px){
-    .container {
-        width: 970px;
-    }
-    .category{
-    	width: 970px;
-    }
-}
-@media (min-width: 768px){
-    .container {
-        width: 750px;
-    }
-    .category {
-        width: 750px;
-    }
+/* ----------------------------- general --------------------------*/
+html{
+    width: 100%;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    word-wrap:break-word;
 }
 
-/* ----------------------------- general --------------------------*/
 body {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    display: block;
+    width: 100%;
+    padding: 0px;
     margin: 0px;
+    display: block;
     font-family: "Helvetica Neu", Arial, Helvetica, sans-serif;
     font-size: 100%;
     font:inherit;
-    vertical-align: baseline;
-    line-height: 1.4.28571429;
     background-color: #fff;
 }
+
 h1, .h1{
     line-height: 1;
     color: ghostwhite;
 }
-html {
-    font-size: 62.5%;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    font-family: sans-serif;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+
+h2 {
+	text-align: center;
 }
+
+.block {
+    text-align: justify;
+    padding: 40px 0px;
+}
+
 *, *::before, *::after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -70,7 +57,6 @@ html {
     margin-bottom: 0px;
     font-size: 21px;
     font-weight: 200;  
-    line-height: 2.1428571435;
     width: 100%;
     color: ghostwhite;
     text-shadow:  1px  1px 2px saddlebrown,
@@ -107,45 +93,163 @@ div {
 	padding-rigth: 30px;
 }
 
+/* ----------------------------- modal dialog: Liste erstellen und Liste bearbeiten ------------------------*/
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
 
-/* ----------------------------- button in head container ------------------------*/
-/*
-a {
-    color: sandybrown;
-    text-decoration: none;
-    background: transparent;
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
 }
-.btn-lg {
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.33;
-    border-radius: 6px;
+
+.modalDialog > div {
+	width: 400px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 20px 50px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
 }
-.btn-default {
-    color: #333333;
-    background-color: #ffffff;
-    border-color: #cccccc;
+
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
 }
-.btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 19px;
+
+.close:hover { background: #00d9ff; }
+
+li{
+	list-style-type: none;
+	flaot: center;
+}
+
+.abbrechenBTN {
+	margin:0 5px 0 0;
+    padding:5px 10px 5px 10px;
+    height:29px;
+    font-size:12px;
+    color:#262626;
+    font-weight:bold;
+    border:1px  #CC3333 solid;
+    border-radius:5px;
+    cursor:pointer;
+    font-family:Arial, Helvetica, sans-serif;
+    /* IE10 Consumer Preview */
+    background: -ms-linear-gradient(top, #FFFFFF 0%,  #CC3333 100%);
+    /* Mozilla Firefox */
+    background: -moz-linear-gradient(top, #FFFFFF 0%,  #CC3333 100%);
+    /* Opera */
+    background: -o-linear-gradient(top, #FFFFFF 0%,  #CC3333 100%);
+    /* Webkit (Safari/Chrome 10) */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1,  #CC3333));
+    /* Webkit (Chrome 11+) */
+    background: -webkit-linear-gradient(top, #FFFFFF 0%,  #CC3333 100%);
+    /* W3C Markup, IE10 Release Preview */
+    background: linear-gradient(to bottom, #FFFFFF 0%,  #CC3333 100%);
+}
+
+.anlegenBTN {
+	margin:0 5px 0 0;
+    padding:5px 10px 5px 10px;
+    height:29px;
+    font-size:12px;
+    color:#262626;
+    font-weight:bold;
+    border:1px  #33CC33 solid;
+    border-radius:5px;
+    cursor:pointer;
+    font-family:Arial, Helvetica, sans-serif;
+    /* IE10 Consumer Preview */
+    background: -ms-linear-gradient(top, #FFFFFF 0%,  #33CC33 100%);
+    /* Mozilla Firefox */
+    background: -moz-linear-gradient(top, #FFFFFF 0%,  #33CC33 100%);
+    /* Opera */
+    background: -o-linear-gradient(top, #FFFFFF 0%,  #33CC33 100%);
+    /* Webkit (Safari/Chrome 10) */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1,  #33CC33));
+    /* Webkit (Chrome 11+) */
+    background: -webkit-linear-gradient(top, #FFFFFF 0%,  #33CC33 100%);
+    /* W3C Markup, IE10 Release Preview */
+    background: linear-gradient(to bottom, #FFFFFF 0%,  #33CC33 100%);
+}
+
+.anlegenBTN:hover:enabled{
+	/* IE10 Consumer Preview */
+    background: -ms-linear-gradient(top, #FFFFFF 0%, #33CC33 100%);
+    /* Mozilla Firefox */
+    background: -moz-linear-gradient(top, #FFFFFF 0%, #33CC33 100%);
+    /* Opera */
+    background: -o-linear-gradient(top, #FFFFFF 0%, #33CC33 100%);
+    /* Webkit (Safari/Chrome 10) */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #33CC33));
+    /* Webkit (Chrome 11+) */
+    background: -webkit-linear-gradient(top, #FFFFFF 0%, #33CC33 100%);
+    /* W3C Markup, IE10 Release Preview */
+    background: linear-gradient(to bottom, #FFFFFF 0%, #33CC33 100%);
+}
+
+.abbrechenBTN:hover:enabled {
+	 border:1px  #663333 solid;
+    /* IE10 Consumer Preview */
+    background: -ms-linear-gradient(top, #FFFFFF 0%, #663333 100%);
+    /* Mozilla Firefox */
+    background: -moz-linear-gradient(top, #FFFFFF 0%, #663333 100%);
+    /* Opera */
+    background: -o-linear-gradient(top, #FFFFFF 0%, #663333 100%);
+    /* Webkit (Safari/Chrome 10) */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #663333));
+    /* Webkit (Chrome 11+) */
+    background: -webkit-linear-gradient(top, #FFFFFF 0%, #663333 100%);
+    /* W3C Markup, IE10 Release Preview */
+    background: linear-gradient(to bottom, #FFFFFF 0%, #663333 100%);
+}
+.anlegenBTN:active:enabled,
+.abbrechenBTN:active:enabled{
+    /* IE10 Consumer Preview */
+    background: -ms-linear-gradient(top, #F0F0F0 0%, #CCCCCC 100%);
+    /* Mozilla Firefox */
+    background: -moz-linear-gradient(top, #F0F0F0 0%, #CCCCCC 100%);
+    /* Opera */
+    background: -o-linear-gradient(top, #F0F0F0 0%, #CCCCCC 100%);
+    /* Webkit (Safari/Chrome 10) */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #F0F0F0), color-stop(1, #CCCCCC));
+    /* Webkit (Chrome 11+) */
+    background: -webkit-linear-gradient(top, #F0F0F0 0%, #CCCCCC 100%);
+    /* W3C Markup, IE10 Release Preview */
+    background: linear-gradient(to bottom, #F0F0F0 0%, #CCCCCC 100%);
+}
+.anlegenBTN:disabled {
     font-weight: normal;
-    line-height: 1.428571429;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
+    color: #888888;
 }
-
-
+}
 

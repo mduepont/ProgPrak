@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:demo.xhtml" PATH="demo.xhtml"
+  SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="ListeErstellen::listeErstellen.xhtml"
+    NAME="output" PATH="listeErstellen.xhtml"
+    TARGET="rules:listeErstellen.xhtml" TITLE="ListeErstellen" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="demo::demo.xhtml" NAME="output1"
+    PATH="demo.xhtml" TARGET="rules:demo.xhtml" TITLE="demo" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="listeBearbeiten::listeBearbeiten.xhtml"
+    NAME="output2" PATH="listeBearbeiten.xhtml"
+    TARGET="rules:listeBearbeiten.xhtml" TITLE="listeBearbeiten" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="impressum::impressum.xhtml" NAME="output3"
+    PATH="impressum.xhtml" TARGET="rules:impressum.xhtml"
+    TITLE="impressum" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="datenschutz::datenschutz.xhtml"
+    NAME="output4" PATH="datenschutz.xhtml"
+    TARGET="rules:datenschutz.xhtml" TITLE="datenschutz" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="kontakt::kontakt.xhtml" NAME="output5"
+    PATH="kontakt.xhtml" TARGET="rules:kontakt.xhtml" TITLE="kontakt" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="geburt::geburt.xhtml" NAME="output6"
+    PATH="geburt.xhtml" TARGET="rules:geburt.xhtml" TITLE="geburt" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="geburtstag::geburtstag.xhtml" NAME="output7"
+    PATH="geburtstag.xhtml" TARGET="rules:geburtstag.xhtml"
+    TITLE="geburtstag" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:kontakt.xhtml" PATH="kontakt.xhtml"
+  SHAPE="304,753,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:impressum.xhtml" PATH="impressum.xhtml"
+  SHAPE="304,529,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:datenschutz.xhtml" PATH="datenschutz.xhtml"
+  SHAPE="304,641,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:listeErstellen.xhtml"
+  PATH="listeErstellen.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:listeBearbeiten.xhtml"
+  PATH="listeBearbeiten.xhtml" SHAPE="304,305,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:geburt.xhtml" PATH="geburt.xhtml"
+  SHAPE="304,337,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:geburtstag.xhtml" PATH="geburtstag.xhtml"
+  SHAPE="304,369,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

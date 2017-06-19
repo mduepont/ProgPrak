@@ -9,13 +9,100 @@
 			    <div class="topnav" id="myTopnav">
 			           	<h:form>
 			            	<a><h:link value="Demo" outcome="demo"/></a>
-			            	<a><h:link value="Liste erstellen" outcome="listeErstellen" /></a>
-			            	<a><h:link value="Liste bearbeiten" outcome="listeBearbeiten" /></a>
+			            	<!-- <a><h:link value="Liste erstellen" outcome="listeErstellen" /></a> -->
+			            	<a href="#listeErstellen">Liste erstellen</a>            	
+			            	<a href="#listeBearbeiten">Liste bearbeiten</a>
 			            	<a href="javascript:void(0);" style="font-size:20px;" class="icon" onclick="myFunction()">&#9776;</a>
 			           	</h:form>
-			           				
-			           	
-			           					           			     
+			           		
+			           
+						<!-- verstecktes Modalfenster zum Einrichten einer neuen Wunschliste -->
+						<div id="listeErstellen" class="modalDialog">
+							<div>
+								<a href="#close" title="Close" class="close">X</a>
+								<h:form>
+									<ul>
+										
+										<li>
+											<dl>
+												<dt>
+													<h:outputLabel value="Titel eingeben: " for="titel" />
+												</dt>
+												<h:inputText id="titel" value="#{listeErstellen.titel}"></h:inputText>
+											</dl>
+										</li>
+										
+										<li>	
+											<dl>
+												<dt>
+													<h:outputLabel value="Anlass wählen: " for="wahl" />
+												</dt>
+												<h:selectOneMenu id="wahl" value="#{listeErstellen.anlass}">
+													<f:selectItems value="#{listeErstellen.anlaesse}"></f:selectItems>
+												</h:selectOneMenu>
+											</dl>
+										</li>
+										
+										<li>
+											<dl>
+												<dt>
+													<h:outputLabel value="Ablaufdatum angeben: " for="datum" />
+												</dt>
+												<h:inputText id="datum" value="#{listeErstellen.datum}" />
+											</dl>
+										</li>
+										<li>									
+											<h:commandButton 
+												styleClass="anlegenBTN"
+								            	value="Liste anlegen" 
+								                action="#{listErstellen.anlegen}"></h:commandButton>
+								             <h:commandButton styleClass="abbrechenBTN"
+								                value="Abbrechen" 
+								                action="#{listeErstellen.abbrechen}"></h:commandButton>
+										</li>
+									</ul>
+								</h:form>	
+							</div>
+						</div>
+						
+						<!-- verstecktes Modalfenster zum Bearbeiten einer bestehenden Wunschliste -->
+						<div id="listeBearbeiten" class="modalDialog">
+							<div>
+								<a href="#close" title="Close" class="close">X</a>
+								<h:form>
+									<ul>
+										
+										<li>
+											<dl>
+												<dt>
+													<h:outputLabel value="Wunschlisten URL angeben: " for="url" />
+												</dt>
+												<h:inputText id="url" value="#{listeBearbeiten.url}"></h:inputText>
+											</dl>
+										</li>
+										
+										<li>	
+											<dl>
+												<dt>
+													<h:outputLabel value="Passwort angeben: " for="listenpasswort" />
+												</dt>
+												<h:inputText id="listenpasswort" value="#{listeBearbeiten.listenpasswort}"></h:inputText>
+											</dl>
+										</li>
+										
+										<li>									
+											<h:commandButton styleClass="anlegenBTN"
+								            	value="Einloggen" 
+								                action="#{listErstellen.anlegen}"></h:commandButton>
+								            <h:commandButton styleClass="abbrechenBTN"
+								                value="Abbrechen" 
+								                action="#{listeErstellen.abbrechen}"></h:commandButton>
+										</li>
+									</ul>
+								</h:form>								
+							</div>
+						</div>
+			           						           					           			     
 			     		<script>
 							function myFunction() {
 							    var x = document.getElementById("myTopnav");
