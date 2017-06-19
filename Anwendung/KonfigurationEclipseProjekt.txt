@@ -1,0 +1,7 @@
+Nötige Konfigurationen damit alles läuft...
+1. Datenbanktreiber: liegt bei unter WebContent/WEB-INF/lib
+	-einmal in den BuildPath integrieren
+	-einmal in diesem lib Verzeichnis
+2. JSF spezifische Bibliothek: liegt bei unter WebContent/WEB-INF/lib
+	-nur in lib
+3. JUnit zum BuildPath hinzufügen
