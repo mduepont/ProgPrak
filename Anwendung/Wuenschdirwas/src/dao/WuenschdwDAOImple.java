@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
 import daten.Wuensche;
@@ -170,13 +171,14 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	 * @param liste
 	 * Dabei wird eine UUID für den Zugriff via link generiert @see zugriffsIdGenerieren()
 	 * Nutzt dabei die Methode @see speichernUndIdHolenWuensche(wuensche)
-	 * Liefert die ID der gespeicherten Liste zurueck
+	 * Liefert die Zugriffs ID der gespeicherten Liste zurueck
+	 * @return String zugriffsId
 	 */
-	public int speichereWunschliste(Wuenschliste liste) {
-		int id = -1;
+	public String speichereWunschliste(Wuenschliste liste) {
+//		int id = -1;
 		String zugriffsId = zugriffsIdGenerieren();
 		liste.setZugriffsId(zugriffsId);
-//		id_ersteller, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus
+//		id_ersteller,id_zugriff, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus
 		try {
 			PreparedStatement stmspeichernliste =
 					getVerbindung().prepareStatement("INSERT INTO wunschliste(id_ersteller, id_zugriff, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus) VALUES (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -194,8 +196,8 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 				throw new SQLException("keine Liste gespeichert");
 			}try(ResultSet setid = stmspeichernliste.getGeneratedKeys()){
 				if(setid.next()){
-					id = setid.getInt(1);
-//					liste.setIdListe(id); ???
+					int id = setid.getInt(1);
+					liste.setIdListe(id); 
 					liste.setWuensche(speichernUndIdHolenWuensche(id, liste.getWuensche()));
 				}
 				else{
@@ -208,7 +210,7 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 			e.printStackTrace();
 		}
 		
-		return id;
+		return liste.getZugriffsId();
 	}
 	/**
 	 * Liefert eine ArrayList von Wünschen zurück, die gespeichert wurden un um eine ID
@@ -231,34 +233,7 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 //		name_wunsch, id_wunsch, beschreibung, link_wunsch
 		for(Wuensche w: wuensche){
 			w = speichereWunsch(listeID, w);
-			/*int id = -1;
-			w = standardWerteWunsch(w);
-				try {
-					PreparedStatement stmspeichernwunsch =
-							getVerbindung().prepareStatement("INSERT INTO wunsch(name_wunsch, id_wunschliste, beschreibung, link_wunsch) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-					stmspeichernwunsch.setString(1, w.getName());
-					stmspeichernwunsch.setInt(2, listeID);
-					stmspeichernwunsch.setString(3, w.getBeschreibung());
-					stmspeichernwunsch.setString(4, w.getLink());
-					int geschrieben = stmspeichernwunsch.executeUpdate();
-					if(geschrieben == 0){
-						throw new SQLException("Kein Wunsch geschrieben");
-					}
-					try(ResultSet setid = stmspeichernwunsch.getGeneratedKeys()){
-						if(setid.next()){
-							id = setid.getInt(1);
-							w.setId(id);
-							speicher.add(w);
-						}
-						else{
-							throw new SQLException("Keine ID erhalten");
-						}
-					}
-					stmspeichernwunsch.close();
-				} catch (SQLException e) {
-					System.out.println("WuenschdwDAOImple/speichernWuensche(id, wuensche): ");
-					e.printStackTrace();
-				}*/
+			speicher.add(w);
 		}
 		if(speicher.size() > 0){
 			wuenscheNeu = speicher;
@@ -305,24 +280,25 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	 * @return Wuenschliste liste
 	 * Verwendet die Methode @see ladeWuensche
 	 */
-	public Wuenschliste ladeWunschliste(int id) {
+	public Wuenschliste ladeWunschliste(String zugriffsId) {
 		Wuenschliste liste = new Wuenschliste();
 		try {
 			PreparedStatement stmladenliste =
-					getVerbindung().prepareStatement("SELECT * FROM wunschliste WHERE id_wunschliste=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			stmladenliste.setInt(1, id);
+					getVerbindung().prepareStatement("SELECT * FROM wunschliste WHERE id_zugriff=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmladenliste.setString(1, zugriffsId);
 			ResultSet setliste = stmladenliste.executeQuery();
 			if(setliste.next()){
 				liste.setIdListe(setliste.getInt(1));
-				liste.setIdErsteller(setliste.getInt(2));
-				liste.setName(setliste.getString(3));
-				liste.setAnlass(setliste.getString(4));
-				Date datum = setliste.getDate(5);
+				liste.setZugriffsId(setliste.getString(2));
+				liste.setIdErsteller(setliste.getInt(3));
+				liste.setName(setliste.getString(4));
+				liste.setAnlass(setliste.getString(5));
+				Date datum = setliste.getDate(6);
 				LocalDate ldatum = datum.toLocalDate();
 				liste.setDatum(ldatum);
-				liste.setListepwd(setliste.getString(6));
-				liste.setDesignid(setliste.getInt(7));
-				liste.setUeberraschung(setliste.getBoolean(8));
+				liste.setListepwd(setliste.getString(7));
+				liste.setDesignid(setliste.getInt(8));
+				liste.setUeberraschung(setliste.getBoolean(9));
 				liste.setWuensche(ladeWuensche(liste.getIdListe()));
 			}
 			stmladenliste.close();
@@ -370,10 +346,53 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 		return false;
 	}
 
+	/**
+	 * Loescht alle Wuensche zu einer uebergebenen LIstenID
+	 * @param idListe
+	 * Liefert zurueck ob dies erfolgreich war
+	 * @return erfolgreich
+	 */
+	private boolean loeschenWuensche(int idListe){
+		boolean geloescht = false;
+		try {
+			PreparedStatement loeschenwuensche=
+					getVerbindung().prepareStatement("DELETE FROM wunsch where id_wunschliste=?");
+			loeschenwuensche.setInt(1, idListe);
+			int zeilen = loeschenwuensche.executeUpdate();
+			if(zeilen > 0){
+				geloescht = true;
+			}
+		}catch (SQLException e) {
+			System.out.println("WuenschdwDAOImple/loescheWuenschw(idListe): ");
+			e.printStackTrace();
+		}
+		return geloescht;
+	}
 	@Override
-	public boolean loescheWunschliste(Wuenschliste liste) {
-		// TODO Auto-generated method stub
-		return false;
+	/**
+	 * Loescht eine Wunschliste zu einer uebergebenen ID
+	 * @param idListe
+	 * Liefert zurück ob dies erfolgreich war
+	 * @return geloescht
+	 * Verwendet die Methode @see loeschenWuensche(idListe)
+	 */
+	public boolean loescheWunschliste(int idListe) {
+		boolean geloescht = false;
+		if(loeschenWuensche(idListe)){
+			try {
+				PreparedStatement loeschenliste =
+						getVerbindung().prepareStatement("DELETE FROM wunschliste where id_wunschliste =?");
+				loeschenliste.setInt(1, idListe);
+				int zeilen = loeschenliste.executeUpdate();
+				if(zeilen > 0){
+					geloescht = true;
+				}
+			} catch (SQLException e) {
+				System.out.println("WuenschdwDAOImple/loescheWunschliste(id): ");
+				e.printStackTrace();
+			}
+		}
+		return geloescht;
 	}
 
 	@Override
@@ -398,10 +417,19 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 			System.out.println("WuenschdwDAOImple/anlaesseLaden(): ");
 			e.printStackTrace();
 		}
+		Collections.sort(anlaesse);
 		return anlaesse;
 	}
 
 	@Override
+	/**
+	 * Speichert einen uebergebenen Wunsch 
+	 * @param wunsch
+	 * Dazu wird die id der Liste benoetigt
+	 * @param idListe
+	 * Liefert den Wunsch mit gesetzter id zurück
+	 * @return wunsch
+	 */
 	public Wuensche speichereWunsch(int idListe, Wuensche wunsch) {
 		int id = -1;
 		wunsch = standardWerteWunsch(wunsch);
@@ -444,9 +472,27 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	}
 
 	@Override
+	/**
+	 * Loescht einen Wunsch zu einer uebergebenen id
+	 * @param idWunsch
+	 * Liefert zurueck ob dies erfolgreich war
+	 * @return geloescht
+	 */
 	public boolean loescheWunsch(int idWunsch) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean geloescht = false;
+		try {
+			PreparedStatement loeschenwunsch =
+					getVerbindung().prepareStatement("DELETE FROM wunsch where id_wunsch=?");
+			loeschenwunsch.setInt(1, idWunsch);
+			int zeilen = loeschenwunsch.executeUpdate();
+			if(zeilen > 0){
+				geloescht = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("WuenschDWDAOImple/loescheWunsch(id): ");
+			e.printStackTrace();
+		}
+		return geloescht;
 	}
 
 }

@@ -67,12 +67,14 @@ public class DaoTest {
 		wuensche.add(w2);
 		wuensche.add(w);
 		wl.setWuensche(wuensche);
-		int id = WuenschdwDAOImple.getInstance().speichereWunschliste(wl);
-		assertFalse(id == -1);
+		System.out.println(wl.toString());
+		String zugriff = WuenschdwDAOImple.getInstance().speichereWunschliste(wl);
+		assertFalse(zugriff == null);
+		System.out.println(wl.toString());
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
 	
-//	@Ignore
+	@Ignore
 	@Test
 	public void testSpeichernListeII(){
 		Wuenschliste wl = new Wuenschliste();
@@ -90,18 +92,19 @@ public class DaoTest {
 		wuensche.add(w2);
 		wuensche.add(w);
 		wl.setWuensche(wuensche);
-		int id = WuenschdwDAOImple.getInstance().speichereWunschliste(wl);
-		assertFalse(id == -1);
-		System.out.println(id);
+		String zugriff = WuenschdwDAOImple.getInstance().speichereWunschliste(wl);
+		assertFalse(zugriff == null);
+		System.out.println(zugriff);
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void testLadenWunschlisteID(){
 		Wuenschliste wl = new Wuenschliste();
-		wl = WuenschdwDAOImple.getInstance().ladeWunschliste(5);
-		assertTrue(wl.getWuensche().get(1).getBeschreibung().equals("In schwarz silber, Groesse 44"));
+		wl = WuenschdwDAOImple.getInstance().ladeWunschliste("380b4dc4-8dce-43b3-88e0-889132f9600e");
+		System.out.println(wl.toString());
+		assertTrue((wl.getWuensche().get(0).getName()).equals("Hausschuhe"));
 		System.out.println(wl.getWuensche().get(1).toString());
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}

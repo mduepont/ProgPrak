@@ -15,7 +15,7 @@ public interface WuenschdwDAO {
 	
 	public Wuensche speichereWunsch(int idListe, Wuensche wunsch); 
 	public Wuensche aendereWunsch(int idWunsch, Wuensche wunsch); //TODO
-	public boolean loescheWunsch(int idWunsch); //TODO
+	public boolean loescheWunsch(int idWunsch); 
 	
 //	public ArrayList<Design> designsLaden();  
 	
@@ -24,10 +24,11 @@ public interface WuenschdwDAO {
 //	public boolean aendereErsteller(WunschlisteErsteller ersteller);
 	public boolean loescheErsteller(int id);
 	
-	public int speichereWunschliste(Wuenschliste liste);
-	public Wuenschliste ladeWunschliste(int id);
+	//lieferts URL pattern zurück
+	public String speichereWunschliste(Wuenschliste liste);
+	public Wuenschliste ladeWunschliste(String zugriffsId);
 	public boolean aenderWunschliste(Wuenschliste liste); //TODO
-	public boolean loescheWunschliste(Wuenschliste liste);//TODO
+	public boolean loescheWunschliste(int idListe);
 	
 //	public Wuenschliste sucheWunschlistenKategorie(String Kategorie);
 //	public Wuenschliste sucheWunschlistenXY(xy)
