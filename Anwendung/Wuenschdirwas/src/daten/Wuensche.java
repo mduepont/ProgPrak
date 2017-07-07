@@ -2,9 +2,9 @@ package daten;
 
 public class Wuensche {
 	
-	private String name = null;
-	private String beschreibung = null;
-	private String link = null;
+	private String name;
+	private String beschreibung;
+	private String link;
 	private int id = -1;
 	private String schenker;
 

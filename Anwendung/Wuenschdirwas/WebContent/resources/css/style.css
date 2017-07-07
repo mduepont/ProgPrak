@@ -64,7 +64,8 @@ h2 {
                  -1px  1px 2px saddlebrown,
                  -1px -1px 2px saddlebrown;
    
-    background-image: url("images/hintergrund1.jpg");
+    background-image: url("../resources/images/hintergrund1.jpg");
+    /* background-image: url("images/hintergrund1.jpg"); */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

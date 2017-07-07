@@ -22,7 +22,7 @@ public class ListeErstellen {
 	private String titel;
 	private String anlass;
 	private ArrayList<String> anlaesse;
-	private Date datum;
+//	private Date datum;
 	private LocalDate ldatum;
 
 	public String getTitel() {
@@ -51,9 +51,10 @@ public class ListeErstellen {
 			int zeilen = anlaesse.size();
 			items = new SelectItem[zeilen];
 			for(int i = 0; i < zeilen; i++){
-				items[i] = new SelectItem(anlaesse.get(i).toLowerCase(), anlaesse.get(i));
+				items[i] = new SelectItem(anlaesse.get(i), anlaesse.get(i));
 			}
 		}
+//		System.out.println(items.toString());
 		return items;
 	}
 
@@ -61,20 +62,20 @@ public class ListeErstellen {
 		this.anlaesse = anlaesse;
 	}
 
-	public Date getDatum() {
-		return datum;
-	}
-
-	public void setDatum(Date datum) {
-		this.datum = datum;
-		System.out.println("setDatum "+datum.toString());
-		zuLDatum();
-	}
+//	public Date getDatum() {
+//		return datum;
+//	}
+//
+//	public void setDatum(Date datum) {
+//		this.datum = datum;
+//		System.out.println("setDatum "+datum.toString());
+//		zuLDatum();
+//	}
 	/*Konvertieren von java.util.Date zu java.time.LocaleDate*/
-	private void zuLDatum(){
-		ldatum = datum.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		setLdatum(ldatum);
-	}
+//	private void zuLDatum(){
+//		ldatum = datum.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//		setLdatum(ldatum);
+//	}
 	public LocalDate getLdatum() {
 		return ldatum;
 	}
@@ -84,7 +85,7 @@ public class ListeErstellen {
 	}
 
 	public void anlegen(){
-		System.out.println("Liste angelegt: "+titel+", "+anlass+", "+datum);
+		System.out.println("Liste angelegt: "+titel+", "+anlass.toString()+", "+ldatum);
 	}
 	
 	public void validateAblaufdatum(FacesContext context, UIComponent component, Object value) throws ValidatorException{
