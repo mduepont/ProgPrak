@@ -138,7 +138,7 @@ public class DatenbankIO {
     	dbnutzer     = properties.getProperty("dbuser");
     	dbpasswort = properties.getProperty("dbpassword");
     	dbtreiber   = properties.getProperty("dbdriver");
-        
+        System.out.println("getProp: "+dbadresse+" "+dbtreiber);
     }
 
 	//Treiber erzeugen

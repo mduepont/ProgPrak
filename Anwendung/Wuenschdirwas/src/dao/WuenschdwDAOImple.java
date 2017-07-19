@@ -401,6 +401,7 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	 * @return anlaesse
 	 */
 	public ArrayList<String> anlaesseLaden() {
+		System.out.println("anlaesseLaden: ");
 		ArrayList<String> anlaesse = null;
 		try {
 			PreparedStatement stmladenanlaesse =

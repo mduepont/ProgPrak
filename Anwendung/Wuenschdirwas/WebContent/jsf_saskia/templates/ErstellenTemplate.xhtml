@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primfaces.org/ui">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<h:outputStylesheet name="style.css" library="css" />
+		<h:outputStylesheet name="contentstyle.css" library="css" />
+		<h:outputStylesheet name="footerstyle.css" library="css" />
+		<h:outputStylesheet name="navigationstyle.css" library="css" />
+		<title><ui:insert name="titel">
+			Neue Liste
+		</ui:insert></title>
+	</h:head>
+	<h:body>
+		<div id="page">
+		
+		<div id="header" class="header">
+			<ui:insert name="header">
+			</ui:insert>
+		</div>
+		
+		<div class="maincontainer">
+        	<div class="container">
+        		<ui:insert name="maincontent">
+        		</ui:insert>
+        	</div>
+        </div>
+        
+        <div class="category">
+        	<ui:insert name="category" />
+        </div>
+		
+		<div id="content" class="content">
+			<div class="contentcontainer">
+    			<div class="inner">
+					<ui:insert name="content">
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+		
+		<div id="footer" class="footer">
+			<ui:insert name="footer">
+			</ui:insert>
+		</div>
+	</div>
+	</h:body>
+</html>
