@@ -138,7 +138,9 @@ public class Wuenschliste {
 		this.wuensche = wuensche;
 	}
 
-
+	public void wuenscheInstanz(){
+		wuensche = new ArrayList<Wuensche>();
+	}
 
 	private boolean passwortKorrekt(String passwort){
 		boolean erg = false;

@@ -27,13 +27,7 @@
 			</h:selectOneMenu>
 			<br/>
 			<h:message for="anlassselect" showSummary="false"></h:message>
-			<br/>
-			<h:outputLabel for="beschreibung" value="Beschreibung: " />
-			<h:inputText id="beschreibung" value="#{erstellenS.beschreibung}">
-				<f:validateLength minimum="10" maximum="500" />
-			</h:inputText>
-			<br/>
-			<h:message for="beschreibung" showSummary="false"></h:message>
+			
 			<br />
 			<h:outputLabel for="datum" value="Ablaufdatum eingeben:	" />
 			<h:inputText id="datum" value="#{erstellenS.ablaufdatum}" required="true">
@@ -44,6 +38,7 @@
 			<h:message for="datum" showSummary="false"></h:message>
 			<br/>
 			<h:commandButton value="weiter" action="#{erstellenS.weiterA}"></h:commandButton>
+			<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" />
 		</h:form>
 	</h:body>
 </html>

@@ -23,7 +23,7 @@ public class AblaufdatumValidierer implements Validator {
 		LocalDate termination = (LocalDate) obj;
 		LocalDate now = LocalDate.now();
 		LocalDate min = now.plusDays(1);
-		LocalDate max = now.plusYears(1);
+		LocalDate max = now.plusYears(2);
 		if(termination.compareTo(min) < 0){
 			FacesMessage message =
 					new FacesMessage("Das Ablaufdatum muss mindestens einen Tag in der Zukunft liegen");
@@ -31,7 +31,7 @@ public class AblaufdatumValidierer implements Validator {
 		}
 		if(termination.compareTo(max) > 0){
 			FacesMessage message =
-					new FacesMessage("Das Ablaufdatum kann h�chstens zwei Jahre in der Zukunft liegen");
+					new FacesMessage("Das Ablaufdatum kann hoechstens zwei Jahre in der Zukunft liegen");
 			throw new ValidatorException(message);
 		}
 	}

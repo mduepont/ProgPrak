@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
 import dao.WuenschdwDAOImple;
+import daten.Wuensche;
 import daten.Wuenschliste;
 
 @ManagedBean(name="erstellenS")
@@ -21,6 +22,9 @@ public class ListeErstellenHandler {
 	private Wuenschliste wunschliste;
 	private String passwort;
 	private String email;
+	private String nameWunsch;
+	private String link;
+	
 	public String getAnlass() {
 		return anlass;
 	}
@@ -64,6 +68,19 @@ public class ListeErstellenHandler {
 		this.email = email;
 	}
 	
+	
+	public String getNameWunsch() {
+		return nameWunsch;
+	}
+	public void setNameWunsch(String nameWunsch) {
+		this.nameWunsch = nameWunsch;
+	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
 	public SelectItem[] getAnlaesse(){
 		SelectItem[] items = null;
 		
@@ -81,6 +98,38 @@ public class ListeErstellenHandler {
 	
 	public String weiterA(){
 		System.out.println("weiterA: "+titel+" "+anlass+" "+ablaufdatum+" "+beschreibung+".");
-		return "ErstellenA";
+		return "ListeErstellenSaskiaB";
+	}
+	
+	public String weiterB(){
+		System.out.println("weiterB: "+nameWunsch+" "+beschreibung+" "+link+".");
+		return "ListeErstellenSaskiaB";
+	}
+	public String datenEntfernen(){
+		this.setTitel(null);
+		this.setAblaufdatum(null);
+		this.setAnlass(null);
+		wunschliste.setWuensche(null);
+		//NOCH MEHR
+		return "ListeErstellenSaskiaA";
+	}
+	public String speichernWunsch(){
+		Wuensche w = new Wuensche();
+		w.setName(nameWunsch);
+		w.setBeschreibung(beschreibung);
+		w.setLink(link);
+		if(wunschliste == null ){
+			System.out.println("wunschliste gleich null");
+			wunschliste = new Wuenschliste();
+		}
+		if(wunschliste.getWuensche()  == null){
+			wunschliste.wuenscheInstanz();
+		}
+		wunschliste.getWuensche().add(w);
+		setNameWunsch(null);
+		setBeschreibung(null);
+		setLink(null);
+		System.out.println("speichernWunsch, länge liste: "+wunschliste.getWuensche().size());
+		return "ListeErstellenSaskiaB.xhtml";
 	}
 }
