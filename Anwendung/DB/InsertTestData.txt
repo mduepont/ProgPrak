@@ -1,22 +1,30 @@
-
+﻿
 --eventuell einzeln ausführen und Übereinstimmung mit generierten IDs beachten!
 --kategorien: Geburtstag, Geburt, Jubiläum, Taufe, Kommunion, Konfirmation, Hennaabend, Hochzeit, Weihnachten, Zuckerfest
 
 TRUNCATE anlass, design, ersteller, geschenk, wunschliste, wunsch;
 
 INSERT INTO anlass (name_anlass) --anpassen an unere Anlässe!
-	VALUES ('Geburtstag'), ('Hochzeit'), ('Konfirmation'), ('Taufe'), ('Geburt'), ('Jubiläum'), ('Kommunion'), ('Hennaabend'), ('Weihnachten'), ('Zuckerfest');
+	VALUES ('keine Angabe'), ('Geburtstag'), ('Hochzeit'), ('Konfirmation'), ('Taufe'), ('Geburt'), ('Jubiläum'), ('Kommunion'), ('Hennaabend'), ('Weihnachten'), ('Zuckerfest');
 	
 INSERT INTO design ( design_id, hintergrundfarbe, schriftfarbe, schriftart)
 		VALUES ('1', 'weiss', 'schwarz', 'arial');
 	
-INSERT INTO ersteller (name_ersteller, email) 
-	VALUES ('Sabrina', 'sabby678@web.de'), ('Anton', 'ichmaghunde@gmx.de'), ('Isa', 'isa@googlemail.de');
+INSERT INTO ersteller (email) 
+	VALUES ('sabby678@web.de'), ('ichmaghunde@gmx.de'), ('isa@googlemail.de'), ('saskia@s.de');
+UPDATE ersteller SET id_ersteller = 1 where email = 'sabby678@web.de';
+UPDATE ersteller SET id_ersteller = 2 where email = 'ichmaghunde@gmx.de';
+UPDATE ersteller SET id_ersteller = 3 where email = 'isa@googlemail.de';
+UPDATE ersteller SET id_ersteller = 4 where email = 'saskia@s.de';
 	
 INSERT INTO wunschliste (id_ersteller, id_zugriff, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus)
-	VALUES ('1', '24876-f8wg-3247k', 'Mein Hochzeit', 'Hochzeit', '2017-09-21', '6gH9ii', '1', 'false'), 
-			('2', 'fd876g-87gas5-87s8696', '18. Geburtstag', 'Geburtstag', '2017-07-03', 'bBaA89cC', '1', 'false'), 
-			('3', '546gvg452-43g326-980h76', 'Taufe meiner Tochter', 'Taufe', '2017-08-18', 'abc123AB', '1', 'true');
+	VALUES ('1', '24876-f8wg-3247k', 'Xyz Hochzeit', 'Hochzeit', '2017-09-21', '6gH9ii', '1', 'false'), 
+			('2', 'fd876g-87gas5-87s8696', '18. Geburtstag von Lennart', 'Geburtstag', '2017-07-03', 'bBaA89cC', '1', 'false'), 
+			('3', '546gvg452-43g326-980h76', 'Taufe von Charleen', 'Taufe', '2017-08-18', 'abc123AB', '1', 'true');
+
+UPDATE wunschliste SET id_wunschliste = 1 WHERE name_wunschliste = 'Xyz Hochzeit';
+UPDATE wunschliste SET id_wunschliste = 2 WHERE name_wunschliste = '18. Geburtstag von Lennart';
+UPDATE wunschliste SET id_wunschliste = 3 WHERE name_wunschliste = 'Taufe von Charleen';
 			
 INSERT INTO wunsch (name_wunsch, id_wunschliste, beschreibung, link_wunsch, schenker)
 	VALUES ('Urlaub auf Spanien', '2', 'keine', 'keiner', 'frei'),

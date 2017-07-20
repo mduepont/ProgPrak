@@ -2,7 +2,10 @@ package beansSaskia;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
@@ -10,6 +13,7 @@ import javax.faces.model.SelectItem;
 import dao.WuenschdwDAOImple;
 import daten.Wuensche;
 import daten.Wuenschliste;
+import daten.WunschlisteErsteller;
 
 @ManagedBean(name="erstellenS")
 @SessionScoped
@@ -25,8 +29,26 @@ public class ListeErstellenHandler {
 	private String nameWunsch;
 	private String link;
 	private boolean ueberraschung;
+	private String linkListe;
+	private ArrayList<String> anlaesse;
+	private SelectItem[] anlaesseItems;
 	
 	
+	public SelectItem[] getAnlaesseItems() {
+		return anlaesseItems;
+	}
+	public void setAnlaesseItems(SelectItem[] anlaesseItems) {
+		this.anlaesseItems = anlaesseItems;
+	}
+	public void setAnlaesse(ArrayList<String> anlaesse) {
+		this.anlaesse = anlaesse;
+	}
+	public String getLinkListe() {
+		return linkListe;
+	}
+	public void setLinkListe(String linkListe) {
+		this.linkListe = linkListe;
+	}
 	public boolean isUeberraschung() {
 		return ueberraschung;
 	}
@@ -104,13 +126,38 @@ public class ListeErstellenHandler {
 		return items;
 	}
 	
+	@PostConstruct
+	public void init(){
+		anlaesse =
+				WuenschdwDAOImple.getInstance().anlaesseLaden();
+		int zeilen = anlaesse.size();
+		int keineAngabe = -1;
+		if(anlaesse != null){
+			for(int i = 0; i < anlaesse.size(); i++){
+				if(anlaesse.get(i).equals("keine Angabe")){
+					keineAngabe = i;
+				}
+			}
+			String speicher = anlaesse.get(keineAngabe);
+			anlaesse.remove(keineAngabe);
+			Collections.sort(anlaesse);
+			anlaesseItems = new SelectItem[zeilen];
+			for(int i = 1; i < zeilen; i++){
+				anlaesseItems[i] = new SelectItem(anlaesse.get(i-1), anlaesse.get(i-1));
+			}
+//			Arrays.sort(anlaesseItems);
+			SelectItem keineAg = new SelectItem(speicher, speicher);
+			anlaesseItems[0] = keineAg;
+		}
+	}
+	
 	public String weiterA(){
 		System.out.println("weiterA: "+titel+" "+anlass+" "+ablaufdatum+" "+beschreibung+".");
 		return "ListeErstellenSaskiaB";
 	}
 	
 	public String weiterB(){
-		System.out.println("weiterB: "+nameWunsch+" "+beschreibung+" "+link+".");
+		System.out.println(wunschliste.getWuensche().toArray().toString());
 		return "ListeErstellenSaskiaC";
 	}
 	public String datenEntfernen(){
@@ -118,7 +165,8 @@ public class ListeErstellenHandler {
 		this.setAblaufdatum(null);
 		this.setAnlass(null);
 		wunschliste.setWuensche(null);
-		//NOCH MEHR
+		this.setEmail(null);
+		this.setPasswort(null);
 		return "ListeErstellenSaskiaA";
 	}
 	public String speichernWunsch(){
@@ -142,6 +190,19 @@ public class ListeErstellenHandler {
 	}
 	
 	public String listeSpeichern(){
+		wunschliste.setName(titel);
+		wunschliste.setAnlass(anlass);
+		wunschliste.setDatum(ablaufdatum);
+		wunschliste.setListepwd(passwort);
+		wunschliste.setUeberraschung(ueberraschung);
+		WunschlisteErsteller ersteller = new WunschlisteErsteller();
+		ersteller.setEmail(email);
+		int idErsteller = WuenschdwDAOImple.getInstance().speichereErsteller(ersteller);
+		System.out.println("idErsteller= "+idErsteller);
+		wunschliste.setIdErsteller(idErsteller);
+		System.out.println(wunschliste.toString());
+		System.out.println(wunschliste.toString());
+		linkListe = WuenschdwDAOImple.getInstance().speichereWunschliste(wunschliste);
 		return "SpeichernErfolgreich";
 	}
 }

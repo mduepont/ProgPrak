@@ -17,8 +17,7 @@ DROP TABLE IF EXISTS geschenk;
    
     CREATE TABLE ersteller(
 	  id_ersteller   serial PRIMARY KEY,
-      name_ersteller text NOT NULL,
-      email          text NOT NULL
+       	  email		     text NOT NULL
       );
       
 	 CREATE TABLE design(
@@ -30,7 +29,7 @@ DROP TABLE IF EXISTS geschenk;
    
     CREATE TABLE wunschliste(
        id_wunschliste           serial PRIMARY KEY ,
-	   id_zugriff				text NOT NULL,
+	id_zugriff				text NOT NULL,
        id_ersteller 			integer NOT Null,
        name_wunschliste         text NOT Null,
        anlass                   text NOT Null,

@@ -21,9 +21,8 @@
 			<br/>
 			<h:outputLabel for="anlassselect" value="Anlass wählen: "></h:outputLabel>
 			<h:selectOneMenu value="#{erstellenS.anlass}" required="true" id="anlassselect">
-				<f:selectItem itemLabel="keiner" itemValue="none"
-					selected="true" />
-				<f:selectItems value="#{erstellenS.anlaesse}"/>
+			
+				<f:selectItems value="#{erstellenS.anlaesseItems}"/>
 			</h:selectOneMenu>
 			<br/>
 			<h:message for="anlassselect" showSummary="false"></h:message>
@@ -38,7 +37,7 @@
 			<h:message for="datum" showSummary="false"></h:message>
 			<br/>
 			<h:commandButton value="weiter" action="#{erstellenS.weiterA}"></h:commandButton>
-			<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" />
+			<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" rendered="#{(erstellenS.titel != null) || (erstellenS.ablaufdatum != null)}"/>
 		</h:form>
 	</h:body>
 </html>

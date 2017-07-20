@@ -59,9 +59,8 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 		int id = -1;
 		try {
 			PreparedStatement stmspeichernersteller =
-					getVerbindung().prepareStatement("INSERT INTO ersteller(name_ersteller, email) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
-			stmspeichernersteller.setString(1, ersteller.getName());
-			stmspeichernersteller.setString(2, ersteller.getEmail());
+					getVerbindung().prepareStatement("INSERT INTO ersteller( email) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+			stmspeichernersteller.setString(1, ersteller.getEmail());
 			int geschrieben = stmspeichernersteller.executeUpdate();
 			if(geschrieben == 0){
 				throw new SQLException("Kein Ersteller gespeichert");
