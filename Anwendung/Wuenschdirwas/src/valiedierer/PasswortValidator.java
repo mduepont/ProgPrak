@@ -17,11 +17,12 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator(value = "passwortValidator")
 public class PasswortValidator implements Validator {
 
-	private String regEx = "((?=.*\\d)(?=.*[a-zäöü])(?=.*[A-Zäöü]).{5,13})";
+	private String regEx = "((?=.*\\d)(?=.*[a-zäöü])(?=.*[A-Zäöü]).{3,20})"; //((?=.*\\d)(?=.*[a-zäöü])(?=.*[A-Zäöü]).{5,13})
 	
 	@Override
 	public void validate(FacesContext context, UIComponent comp, Object obj) throws ValidatorException {
 		String password = (String)obj;
+		System.out.println("PW Valid: "+password);
 		if(!password.matches(regEx)){
 			FacesMessage message =
 					new FacesMessage("Das Passwort muss mindestens einen Klein- und einen Gro�buchstaben,"

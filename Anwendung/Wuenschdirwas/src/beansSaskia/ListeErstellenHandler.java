@@ -24,7 +24,15 @@ public class ListeErstellenHandler {
 	private String email;
 	private String nameWunsch;
 	private String link;
+	private boolean ueberraschung;
 	
+	
+	public boolean isUeberraschung() {
+		return ueberraschung;
+	}
+	public void setUeberraschung(boolean ueberraschung) {
+		this.ueberraschung = ueberraschung;
+	}
 	public String getAnlass() {
 		return anlass;
 	}
@@ -103,7 +111,7 @@ public class ListeErstellenHandler {
 	
 	public String weiterB(){
 		System.out.println("weiterB: "+nameWunsch+" "+beschreibung+" "+link+".");
-		return "ListeErstellenSaskiaB";
+		return "ListeErstellenSaskiaC";
 	}
 	public String datenEntfernen(){
 		this.setTitel(null);
@@ -131,5 +139,9 @@ public class ListeErstellenHandler {
 		setLink(null);
 		System.out.println("speichernWunsch, länge liste: "+wunschliste.getWuensche().size());
 		return "ListeErstellenSaskiaB.xhtml";
+	}
+	
+	public String listeSpeichern(){
+		return "SpeichernErfolgreich";
 	}
 }

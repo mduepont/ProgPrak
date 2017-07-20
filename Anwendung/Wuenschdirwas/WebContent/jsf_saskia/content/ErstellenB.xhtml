@@ -47,9 +47,9 @@
 		</h:column>
 	</h:dataTable>
 	<h:form>
-		<h:commandButton value="weiter" action="#{erstellenS.weiterB}" rendered="#{erstellenS.wunschliste.getWuensche().size() > 0}"/>
 		<h:commandButton value="zurück" action="ListeErstellenSaskiaA" />
-		<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" />
+		<h:commandButton value="weiter" action="#{erstellenS.weiterB}" rendered="#{erstellenS.wunschliste.getWuensche().size() > 0}"/>
+		<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" rendered="#{erstellenS.wunschliste.wuensche != null}"/>
 	</h:form>
 	</h:body>
 </html>

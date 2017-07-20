@@ -5,3 +5,4 @@ Nötige Konfigurationen damit alles läuft...
 2. JSF spezifische Bibliothek: liegt bei unter WebContent/WEB-INF/lib
 	-nur in lib
 3. JUnit zum BuildPath hinzufügen
+4. dbzugang.properties anpassen an eigene Zugangsdaten!
