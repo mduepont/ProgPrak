@@ -30,26 +30,37 @@
 			<h:message for="link" showSummary="false"></h:message>
 			<br/>
 			<h:commandButton value="speichern" action="#{erstellenS.speichernWunsch}" />
+			
 		</h:form>
-		<h:dataTable value="#{erstellenS.wunschliste.wuensche}" var="w" border="1"
-				rendered="#{erstellenS.wunschliste.wuensche != null}">
-		<h:column>
-			<f:facet name="header" >Name</f:facet>
-			#{w.name}
-		</h:column>
-		<h:column>
-			<f:facet name="header" >Beschreibung</f:facet>
-			#{w.beschreibung}
-		</h:column>
-		<h:column>
-			<f:facet name="header">Link</f:facet>
-			#{w.link}
-		</h:column>
-	</h:dataTable>
+		
+			<h:dataTable value="#{erstellenS.wunschliste.wuensche}" var="w" border="1"
+					rendered="#{erstellenS.wunschliste.wuensche != null}" 
+					binding="#{erstellenS.wunschtabelle}"
+					rowSelectionAllowed="true">
+			<h:column>
+				<f:facet name="header" >Name</f:facet>
+				#{w.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header" >Beschreibung</f:facet>
+				#{w.beschreibung}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Link</f:facet>
+				#{w.link}
+			</h:column>
+			<h:column>
+				<f:facet name="header"></f:facet>
+				<h:form>
+				<h:commandButton value="x" action="#{erstellenS.loeschenWunsch}"></h:commandButton>
+				</h:form>
+			</h:column>
+		</h:dataTable>
+	
 	<h:form>
-		<h:commandButton value="zurück" action="ListeErstellenSaskiaA" />
 		<h:commandButton value="weiter" action="#{erstellenS.weiterB}" rendered="#{erstellenS.wunschliste.getWuensche().size() > 0}"/>
 		<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" rendered="#{erstellenS.wunschliste.wuensche != null}"/>
+		<br /> <h:commandButton value="zurück" action="ListeErstellenSaskiaA" />
 	</h:form>
 	</h:body>
 </html>

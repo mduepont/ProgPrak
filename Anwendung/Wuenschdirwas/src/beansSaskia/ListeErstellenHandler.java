@@ -8,6 +8,7 @@ import java.util.Collections;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.model.SelectItem;
 
 import dao.WuenschdwDAOImple;
@@ -32,8 +33,15 @@ public class ListeErstellenHandler {
 	private String linkListe;
 	private ArrayList<String> anlaesse;
 	private SelectItem[] anlaesseItems;
+	private HtmlDataTable wunschtabelle;
 	
 	
+	public HtmlDataTable getWunschtabelle() {
+		return wunschtabelle;
+	}
+	public void setWunschtabelle(HtmlDataTable wunschtabelle) {
+		this.wunschtabelle = wunschtabelle;
+	}
 	public SelectItem[] getAnlaesseItems() {
 		return anlaesseItems;
 	}
@@ -204,5 +212,18 @@ public class ListeErstellenHandler {
 		System.out.println(wunschliste.toString());
 		linkListe = WuenschdwDAOImple.getInstance().speichereWunschliste(wunschliste);
 		return "SpeichernErfolgreich";
+	}
+	
+	public void loeschenWunsch(){
+		System.out.println("loeschen ");
+		Wuensche w = (Wuensche)wunschtabelle.getRowData();
+		
+		System.out.println("Wunsch: "+w.toString());
+//			setNameWunsch(w.getName());
+//			setBeschreibung(w.getBeschreibung());
+//			setLink(w.getLink());
+		int index = wunschtabelle.getRowIndex();
+		wunschliste.getWuensche().remove(index);
+		System.out.println("jsf Index: "+index);
 	}
 }

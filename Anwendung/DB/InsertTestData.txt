@@ -30,5 +30,13 @@ INSERT INTO wunsch (name_wunsch, id_wunschliste, beschreibung, link_wunsch, sche
 	VALUES ('Urlaub auf Spanien', '2', 'keine', 'keiner', 'frei'),
 	('Schuhe von Adidas', '2', 'In schwarz silber, Groesse 44', 'www.adidas.de/artikel/schuhe/Sneakers-black-fancy', 'Emil'),
 	('Sonnenbrille', '2', 'Marke xy', 'keiner', 'Irina'), ('Vodka', '2', 'keine', 'keiner', 'Marcel'),
+	('Geld zum Führerschein', '2', 'keine', 'keiner', 'frei'),
+	('Geld zum Führerschein', '2', 'keine', 'keiner', 'Onkel August'),
+	('Geld zum Führerschein', '2', 'keine', 'keiner', 'frei'),
+	('Computertasche', '2', 'am liebsten in grau oder blau', 'www.schlepp-dein-Kram.de/bags/bagLalaBlaba12', 'frei'),
 	('Toaster', '1', 'Edelstahlt und von WMF', 'www.wmf.de/sortiment/Toaster-Edelstahl', 'frei'),
-	('Tragetuch', '3', 'keine', 'keiner', 'Gabi und Ludwig');
+	('Tragetuch', '3', 'keine', 'keiner', 'Gabi und Ludwig'),
+	('Hipp Babybrei', '3', 'Sie mag am liebsten Aprikose-Handtuch und Schublade-Erdbeere', 'keiner', 'frei'),
+	('Entspannungskurs', '3', '3 Wochen an der Ostsee', 'www.ertragDeinKindBesser.de/kurs666', 'Gernot'),
+	('Babysocken', '3', 'gerne selbst gestrickt', 'keiner', 'frei'),
+	('Lammfell', '3', 'für das Kinderbettchen', 'keiner', 'frei');

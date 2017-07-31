@@ -40,9 +40,12 @@
 			<br/>
 			
 			<br/>
-			<h:commandButton value="zurück" action="ListeErstellenSaskiaB" />
+			
 			<h:commandButton value="Liste speichern" action="#{erstellenS.listeSpeichern}" />
 			<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" rendered="#{(erstellenS.email != null) || (erstellenS.passwort != null)}"/>
+		</h:form><br />
+		<h:form>
+			<h:commandButton value="zurück" action="ListeErstellenSaskiaB" />
 		</h:form>
 	</h:body>
 </html>
