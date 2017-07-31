@@ -14,7 +14,7 @@
 			<h:inputText id="titel" value="#{erstellenS.titel}" required="true" >
 				<f:validateLength minimum="3" maximum="53"></f:validateLength>
 				<!-- Titel muss mit Buchstaben beginnen -->
-				<f:validateRegex pattern="[A-ZÖÜÄ]+.+" />
+				<f:validateRegex pattern="[0-9A-ZÖÜÄ]+.+" />
 			</h:inputText>
 			<br/>
 			<h:message for="titel" showSummary="false"></h:message>

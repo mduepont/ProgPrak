@@ -17,7 +17,7 @@
 			</h:inputText><br/>
 			<h:message for="email" showSummary="false" />
 			<br/>
-			<h:outputLabel for="email" value="Änderungspasswort:" />
+			<h:outputLabel for="passwort" value="Änderungspasswort:" />
 			<h:inputSecret id="passwort" value="#{erstellenS.passwort}"
 				 required="true" binding="#{password1}"
 				validator="passwortValidator">
@@ -25,7 +25,7 @@
 			</h:inputSecret><br/>
 			<h:message for="passwort" showSummary="false" />
 			<br/>		
-			<h:outputLabel for="email" value="Passwort wiederholen:" />
+			<h:outputLabel for="passwort2" value="Passwort wiederholen:" />
 			<h:inputSecret id="passwort2" value="#{erstellenS.passwort}"
 				required="true"
 				validator="passwortValidator">

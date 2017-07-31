@@ -339,10 +339,38 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 		return wuensche;
 	}
 
+	/**
+	 * Aendert die Daten einer uebergebenen Wunschliste
+	 * @param liste
+	 * Fixe Daten sind: ID der Liste, ZugriffsID, ErstellerID
+	 * Liefert zurück ob erfolgreich
+	 * @return erg
+	 */
 	@Override
 	public boolean aenderWunschliste(Wuenschliste liste) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean erg = false;
+		
+		try {
+			PreparedStatement stmaendernliste =
+					getVerbindung().prepareStatement("UPDATE wunschliste SET name_wunschliste=?, anlass=?, ablaufdatum=?, listenpasswort=?, design_id=?, uberraschungsmodus=? WHERE id_wunschliste=?"); //7
+			stmaendernliste.setString(1, liste.getName());
+			stmaendernliste.setString(2, liste.getAnlass());
+			Date datum = Date.valueOf(liste.getDatum());
+			stmaendernliste.setDate(3, datum);
+			stmaendernliste.setString(4, liste.getListepwd());
+			stmaendernliste.setInt(5, liste.getDesignid());
+			stmaendernliste.setBoolean(6, liste.isUeberraschung());
+			stmaendernliste.setInt(7, liste.getIdListe());
+			int zeilen = stmaendernliste.executeUpdate();
+			if(zeilen > 0){
+				erg = true;
+			}
+			stmaendernliste.close();
+		} catch (SQLException e) {
+			System.out.println("WuenschdwDAOImple/aendernWunschliste(liste): ");
+			e.printStackTrace();
+		}
+		return erg;
 	}
 
 	/**
@@ -495,4 +523,74 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 		return geloescht;
 	}
 
+	/**
+	 * Sucht in der Datenbank nach einer Liste zu einer uebergebenen uuid
+	 * @param uuid
+	 * Liefert zurueck ob etwas gefunden wurde
+	 * @return erg
+	 */
+	public boolean listeSuchen(String uuid){ //TEST
+		boolean erg = false;
+		try {
+			PreparedStatement stmsuchenliste = 
+					getVerbindung().prepareStatement("SELECT * FROM wunschliste WHERE id_zugriff=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmsuchenliste.setString(1, uuid);
+			ResultSet setliste = stmsuchenliste.executeQuery();
+			if(setliste.next()){
+				erg = true;
+			}
+			stmsuchenliste.close();
+			setliste.close();
+		} catch (SQLException e) {
+			System.out.println("WuenschdwDAOImple/ listeSuchen(uuid, passwort): ");
+			e.printStackTrace();
+		}
+		return erg;
+	}
+	
+	/**
+	 * Sucht in der Datenbank nach einer Liste zu einem uebergebenen pqsswort
+	 * @param passwor
+	 * Liefert zurueck ob etwas gefunden wurde
+	 * @return erg
+	 */
+	public boolean listeNachPasswort(String passwort){ //TEST
+		boolean erg = false;
+		try {
+			PreparedStatement stmsuchenpasswort = 
+					getVerbindung().prepareStatement("SELECT * FROM wunschliste WHERE listenpasswort=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmsuchenpasswort.setString(1, passwort);
+			ResultSet setliste = stmsuchenpasswort.executeQuery();
+			if(setliste.next()){
+				erg = true;
+			}
+			stmsuchenpasswort.close();
+			setliste.close();
+		} catch (SQLException e) {
+			System.out.println("WuenschdwDAOImple/listeNachPasswort(passwort): ");
+			e.printStackTrace();
+		}
+		return erg;
+	}
+	
+	public WunschlisteErsteller ladeErstellerId(int idErsteller){ //TEST
+		WunschlisteErsteller ersteller = null;
+		try {
+			PreparedStatement stmladenersteller = 
+					getVerbindung().prepareStatement("SELECT * FROM ersteller WHERE id_ersteller=?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stmladenersteller.setInt(1, idErsteller);
+			ResultSet setersteller = stmladenersteller.executeQuery();
+			if(setersteller.next()){
+				ersteller = new WunschlisteErsteller();
+				ersteller.setEmail(setersteller.getString(2));
+				ersteller.setId(setersteller.getInt(1));
+			}
+			stmladenersteller.close();
+			setersteller.close();
+		} catch (SQLException e) {
+			System.out.println("WuenschdwDAOImple/ladeErsteller(idERsteller): ");
+			e.printStackTrace();
+		}
+		return ersteller;
+	}
 }

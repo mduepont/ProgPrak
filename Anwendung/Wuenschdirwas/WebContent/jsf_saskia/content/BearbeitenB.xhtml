@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primfaces.org/ui">
+	<h:head>
+		<meta charset="UTF-8" />
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="2" border="1">
+				<h:outputLabel value="Details der Liste bearbeiten" />
+				<h:outputLabel value="Wünsche bearbeiten" />
+				<h:commandButton value="zur Liste" action="#{bearbeitenS.zurListe}"/>
+				<h:commandButton value="zu den Wünschen" action="#{bearbeitenS.zuDenWuenschen}"/>
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+</html>

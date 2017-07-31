@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primfaces.org/ui">
+	<h:head>
+		<meta charset="UTF-8" />
+	</h:head>
+	<h:body>
+	<h2>Details deiner Liste</h2>
+	<h3>Passwort ändern</h3>
+		<h:outputText value="#{bearbeitenS.pwInfo}" />
+			<h:form>
+				<br/>
+			<h:outputLabel for="passwort" value="Änderungspasswort:" />
+			<h:inputSecret id="passwort" value="#{bearbeitenS.passwort1}"
+				required="true" binding="#{password1}"
+				validator="passwortValidator">
+				<f:validateLength minimum="5" maximum="20" />
+			<!-- 	<f:validator validatorId="passwortAendern1"/>
+				<f:attribute name="passwort2" value="#{password2}" /> -->
+			</h:inputSecret><br/>
+			<h:message for="passwort" showSummary="false" />
+			<br/>		
+			<h:outputLabel for="passwort2" value="Passwort wiederholen:" />
+			<h:inputSecret id="passwort2" value="#{bearbeitenS.passwort2}"
+				required="true" binding="#{password2}" validator="passwortValidator">
+				<f:validateLength minimum="5" maximum="20" />
+				<!-- <f:validator validatorId="passwortAendern2"/> -->
+				 <f:validator validatorId="duplicate" />
+				<f:attribute name="password1" value="#{password1}" />
+			</h:inputSecret><br/>
+			<h:message for="passwort2" showSummary="false" />
+			<br />
+			<h:commandButton value="ändern" action="#{bearbeitenS.pwAendern}" />
+			</h:form>
+	<h3>Details ändern: </h3>
+		<h:form>
+			<h:outputLabel for="titel" value="Titel der Liste: "/>
+			<h:inputText id="titel" value="#{bearbeitenS.liste.name}" required="true" >
+				<f:validateLength minimum="3" maximum="53"></f:validateLength>
+				<!-- Titel muss mit Buchstaben beginnen -->
+				<f:validateRegex pattern="[0-9A-ZÖÜÄ]+.+" />
+			</h:inputText>
+			<br/>
+			<h:message for="titel" showSummary="false"></h:message>
+			<br />
+			<h:outputLabel for="anlassselect" value="Anlass wählen: "></h:outputLabel>
+			<h:selectOneMenu value="#{bearbeitenS.liste.anlass}" required="true" id="anlassselect">
+			
+				<f:selectItems value="#{bearbeitenS.anlaesseItems}"/>
+			</h:selectOneMenu>
+			<br/>
+			<h:message for="anlassselect" showSummary="false"></h:message>
+			<br />
+			<h:outputLabel for="datum" value="Ablaufdatum eingeben:	" />
+			<h:inputText id="datum" value="#{bearbeitenS.liste.datum}" required="true">
+				<f:validator validatorId="ablauf" />
+				<f:converter converterId="localDateTimeKonverter" />
+			</h:inputText>
+			<br/>
+			<h:message for="datum" showSummary="false"></h:message>
+			<br/>
+			<h:outputLabel for="email" value="Emailadresse:" />
+			<h:inputText id="email" value="#{bearbeitenS.ersteller.email}"
+				required="true" validator="emailValidator">
+				<f:validateLength minimum="5" maximum="50" />
+			</h:inputText><br/>
+			<h:message for="email" showSummary="false" />
+			
+			<br/>
+			<h:outputLabel for="ueberraschung" value="Ueberraschungsmodus wählen" />
+			<h:selectBooleanCheckbox value="#{bearbeitenS.liste.ueberraschung}" id="ueberraschung"/>
+			<br/>
+			<h:commandButton value="bestätigen" action="#{bearbeitenS.aendern}" />
+		</h:form>
+		
+	</h:body>
+</html>

@@ -21,6 +21,7 @@ public interface WuenschdwDAO {
 	
 	public int speichereErsteller(WunschlisteErsteller ersteller);
 	public WunschlisteErsteller ladeErsteller(String email);
+	public WunschlisteErsteller ladeErstellerId(int idErsteller);
 //	public boolean aendereErsteller(WunschlisteErsteller ersteller);
 	public boolean loescheErsteller(int id);
 	
@@ -29,6 +30,9 @@ public interface WuenschdwDAO {
 	public Wuenschliste ladeWunschliste(String zugriffsId);
 	public boolean aenderWunschliste(Wuenschliste liste); //TODO
 	public boolean loescheWunschliste(int idListe);
+	
+	public boolean listeSuchen(String uuid);
+	public boolean listeNachPasswort(String passwort);
 	
 //	public Wuenschliste sucheWunschlistenKategorie(String Kategorie);
 //	public Wuenschliste sucheWunschlistenXY(xy)

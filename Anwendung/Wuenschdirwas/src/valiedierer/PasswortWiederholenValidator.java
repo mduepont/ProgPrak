@@ -10,8 +10,7 @@ import javax.faces.validator.ValidatorException;
 
 /**
  * Validator zur �berpr�fung einer korrekten Wiederholung
- * der Eingabe des Passworts, bei der Erstellung eines neuen 
- * Accounts bei Zeitbasar
+ * der Eingabe des Passworts, beim Anlegen einer neuen Wunschliste
  *
  */
 

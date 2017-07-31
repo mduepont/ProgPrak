@@ -98,7 +98,7 @@ public class DaoTest {
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
 	
-//	@Ignore
+	@Ignore
 	@Test
 	public void testLadenWunschlisteID(){
 		Wuenschliste wl = new Wuenschliste();
@@ -117,5 +117,24 @@ public class DaoTest {
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 		assertTrue(anlaesse.size() >0);
 		System.out.println(anlaesse.toString());
+	}
+//	@Ignore 
+	@Test
+	public void testAendernWunschliste(){
+		Wuenschliste liste = new Wuenschliste();
+		liste.setAnlass("Hochzeit");
+		LocalDate datum = LocalDate.of(2018, 1, 11);
+		liste.setDatum(datum);
+//		liste.setIdErsteller(1);
+		liste.setDesignid(1);
+		liste.setListepwd("123AbC");
+		liste.setIdListe(45);
+		liste.setName("Neuer Name");
+		liste.setUeberraschung(true);
+//		liste.setIdListe(1);
+//		liste.setZugriffsId("aaa1-bbb2-ccc3");
+		//WUENSCHE
+		assertTrue(WuenschdwDAOImple.getInstance().aenderWunschliste(liste));
+		
 	}
 }
