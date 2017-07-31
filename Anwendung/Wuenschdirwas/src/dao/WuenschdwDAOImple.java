@@ -384,9 +384,11 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 		try {
 			PreparedStatement loeschenwuensche=
 					getVerbindung().prepareStatement("DELETE FROM wunsch where id_wunschliste=?");
+//			System.out.println(loeschenwuensche.toString());
 			loeschenwuensche.setInt(1, idListe);
 			int zeilen = loeschenwuensche.executeUpdate();
 			if(zeilen > 0){
+//				System.out.println("wuensche gelöscht");
 				geloescht = true;
 			}
 		}catch (SQLException e) {
@@ -408,10 +410,12 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 		if(loeschenWuensche(idListe)){
 			try {
 				PreparedStatement loeschenliste =
-						getVerbindung().prepareStatement("DELETE FROM wunschliste where id_wunschliste =?");
+						getVerbindung().prepareStatement("DELETE FROM wunschliste WHERE id_wunschliste=?");
+//				System.out.println(loeschenliste.toString());
 				loeschenliste.setInt(1, idListe);
 				int zeilen = loeschenliste.executeUpdate();
 				if(zeilen > 0){
+//					System.out.println("WL gelöscht");
 					geloescht = true;
 				}
 			} catch (SQLException e) {
@@ -461,7 +465,7 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	public Wuensche speichereWunsch(int idListe, Wuensche wunsch) {
 		int id = -1;
 		wunsch = standardWerteWunsch(wunsch);
-		System.out.println("speicherWunsch: "+wunsch.toString());
+//		System.out.println("speicherWunsch: "+wunsch.toString());
 			try {
 				PreparedStatement stmspeichernwunsch =
 						getVerbindung().prepareStatement("INSERT INTO wunsch(name_wunsch, id_wunschliste, beschreibung, link_wunsch, schenker) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -493,10 +497,25 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	}
 
 	@Override
-	public Wuensche aendereWunsch(int idWunsch, Wuensche wunsch) {
+	public boolean aendereWunsch(int idWunsch, Wuensche wunsch) {
+		boolean erg = false;
+		try {
+			PreparedStatement stmaendernwunsch =
+					getVerbindung().prepareStatement("UPDATE wunsch SET name_wunsch=?, beschreibung=?, link_wunsch=? WHERE id_wunsch=?");
+			stmaendernwunsch.setString(1, wunsch.getName());
+			stmaendernwunsch.setString(2, wunsch.getBeschreibung());
+			stmaendernwunsch.setString(3, wunsch.getLink());
+			stmaendernwunsch.setInt(4, idWunsch);
+			int zeilen = stmaendernwunsch.executeUpdate();
+			if(zeilen > 0){
+				erg = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("WuenschdwDAOImple/aendereWunsch(idWunsch, wunsch): ");
+			e.printStackTrace();
+		}
 		
-		// TODO Auto-generated method stub
-		return wunsch;
+		return erg;
 	}
 
 	@Override

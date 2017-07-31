@@ -25,26 +25,32 @@ public class DaoTest {
 	public void testErstellerSpeichern() {
 		WunschlisteErsteller er = new WunschlisteErsteller();
 		er.setEmail("karlmarx@gmx.de");
-		er.setName("Karl"); 
 		System.out.println(er.toString());
 		int id = WuenschdwDAOImple.getInstance().speichereErsteller(er);
-		er.setId(id);
-		assertFalse(er.getId() == -1);
+		assertFalse(id == -1);
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
 
 	@Ignore
 	@Test
-	public void testErstellerLaden() {
-		WunschlisteErsteller er = WuenschdwDAOImple.getInstance().ladeErsteller("karlmarx@gmx.de");
+	public void testErstellerLaden() { 
+		WunschlisteErsteller er = WuenschdwDAOImple.getInstance().ladeErsteller("sabby678@web.de");
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
-		assertTrue(er.getName().equals("Karl"));
+		assertTrue(er.getId() == 1);
+	}
+	
+	@Ignore
+	@Test
+	public void testErstellerLadenId(){
+		WunschlisteErsteller e = WuenschdwDAOImple.getInstance().ladeErstellerId(1);
+		assertTrue(e.getEmail().equals("sabby678@web.de"));
+		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
 	
 	@Ignore
 	@Test
 	public void testErstellerLoeschen() {
-		boolean erg = WuenschdwDAOImple.getInstance().loescheErsteller(10);
+		boolean erg = WuenschdwDAOImple.getInstance().loescheErsteller(5);
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 		assertTrue(erg);
 	}
@@ -100,11 +106,11 @@ public class DaoTest {
 	
 	@Ignore
 	@Test
-	public void testLadenWunschlisteID(){
+	public void testLadenWunschlisteUUID(){
 		Wuenschliste wl = new Wuenschliste();
-		wl = WuenschdwDAOImple.getInstance().ladeWunschliste("380b4dc4-8dce-43b3-88e0-889132f9600e");
+		wl = WuenschdwDAOImple.getInstance().ladeWunschliste("546gvg452-43g326-980h76");
 		System.out.println(wl.toString());
-		assertTrue((wl.getWuensche().get(0).getName()).equals("Hausschuhe"));
+		assertTrue((wl.getWuensche().get(0).getName()).equals("Tragetuch"));
 		System.out.println(wl.getWuensche().get(1).toString());
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
@@ -118,7 +124,7 @@ public class DaoTest {
 		assertTrue(anlaesse.size() >0);
 		System.out.println(anlaesse.toString());
 	}
-//	@Ignore 
+	@Ignore 
 	@Test
 	public void testAendernWunschliste(){
 		Wuenschliste liste = new Wuenschliste();
@@ -135,6 +141,59 @@ public class DaoTest {
 //		liste.setZugriffsId("aaa1-bbb2-ccc3");
 		//WUENSCHE
 		assertTrue(WuenschdwDAOImple.getInstance().aenderWunschliste(liste));
+		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
+	}
+	
+	@Ignore
+	@Test
+	public void testListeNachPasswort(){
+		assertTrue(WuenschdwDAOImple.getInstance().listeNachPasswort("bBaA89cC"));
+		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
+	}
+	
+
+	@Ignore
+	@Test
+	public void testListeSuchen(){
+		assertTrue(WuenschdwDAOImple.getInstance().listeSuchen("fd876g-87gas5-87s8696"));
+		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
+	}
+	
+	@Ignore
+	@Test
+	public void loeschenWunsch(){
+		assertTrue(WuenschdwDAOImple.getInstance().loescheWunsch(33));
+		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
+	}
+	
+	@Ignore
+	@Test
+	public void loeschenWunschliste(){
+		assertTrue(WuenschdwDAOImple.getInstance().loescheWunschliste(1));
+		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 		
+	}
+	
+	@Ignore
+	@Test
+	public void speichernWunsch(){
+		Wuensche w = new Wuensche();
+		w.setBeschreibung("mein aller größter Wunsch");
+		w.setLink("www.Kamel_Reiten_Hümner.de");
+		w.setName("Kamel Reitwanderung");
+		w = WuenschdwDAOImple.getInstance().speichereWunsch(1, w);
+		assertFalse(w.getId() == -1);
+		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
+	}
+	
+//	@Ignore
+	@Test
+	public void aendernWunsch(){
+		Wuensche w = new Wuensche();
+		w.setName("Sonnenbrille");
+		w.setBeschreibung("von Marke superTeuerUndHip");
+		w.setLink("keiner");
+		assertTrue(WuenschdwDAOImple.getInstance().aendereWunsch(54, w));
+		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
 }

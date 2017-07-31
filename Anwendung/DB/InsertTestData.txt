@@ -11,11 +11,12 @@ INSERT INTO design ( design_id, hintergrundfarbe, schriftfarbe, schriftart)
 		VALUES ('1', 'weiss', 'schwarz', 'arial');
 	
 INSERT INTO ersteller (email) 
-	VALUES ('sabby678@web.de'), ('ichmaghunde@gmx.de'), ('isa@googlemail.de'), ('saskia@s.de');
+	VALUES ('sabby678@web.de'), ('ichmaghunde@gmx.de'), ('isa@googlemail.de'), ('saskia@s.de'), ('karlmagsbunt@gmx.de');
 UPDATE ersteller SET id_ersteller = 1 where email = 'sabby678@web.de';
 UPDATE ersteller SET id_ersteller = 2 where email = 'ichmaghunde@gmx.de';
 UPDATE ersteller SET id_ersteller = 3 where email = 'isa@googlemail.de';
 UPDATE ersteller SET id_ersteller = 4 where email = 'saskia@s.de';
+UPDATE ersteller SET id_ersteller = 5 where email = 'karlmagsbunt@gmx.de';
 	
 INSERT INTO wunschliste (id_ersteller, id_zugriff, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus)
 	VALUES ('1', '24876-f8wg-3247k', 'Xyz Hochzeit', 'Hochzeit', '2017-09-21', '6gH9ii', '1', 'false'), 
