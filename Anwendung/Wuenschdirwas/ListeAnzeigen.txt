@@ -1,0 +1,3 @@
+http://localhost:8080/Wuenschdirwas/jsf_saskia/seiten/PersoenlicheListe.xhtml?uuid=fd876g-87gas5-87s8696
+
+nach Anlegen der DB und Einspielen der Daten ist über diesen Link eine Beispielliste aufrufbar. Für andere Listen eben UUID austauschen.

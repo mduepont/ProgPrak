@@ -10,6 +10,9 @@
 	</h:head>
 	<h:body>
 		<ui:composition template="../templates/ErstellenTemplate.xhtml">
+			<ui:define name="titel">
+				MeineListe		
+			</ui:define>
 			<ui:define name="header">
 				<ui:include src="../../WEB-INF/header.xhtml" />
 			</ui:define>
@@ -17,9 +20,9 @@
 				<!-- <ui:include> -->
 				<div class="container">
         		<br />
-            	<h:outputText value="Erstelle deine eigene Liste "></h:outputText>
+            	<h:outputText value="Bearbeite deine Liste oder sieh dir die Details nocheinmal an "></h:outputText>
             	<br />
-            	<h:outputText value="Gib im ersten Schritt den Titel, das Ablaufdatum und den Anlass für dein Event an. "></h:outputText>
+            	<h:outputText value="Hier kannst du die Wünsche deiner Liste bearbeiten. "></h:outputText>
         	</div>
 				<!-- </ui:include> -->
 			</ui:define>
@@ -59,7 +62,7 @@
 				<!-- </ui:include> -->
 			</ui:define>
 			<ui:define name="content">
-				<ui:include src="../content/ErstellenA.xhtml"></ui:include>
+				<ui:include src="../content/BearbeitenWuensche.xhtml"></ui:include>
 			</ui:define>
 			<ui:define name="footer">
 				<ui:include src="../../WEB-INF/footer.xhtml" />

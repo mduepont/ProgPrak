@@ -188,12 +188,14 @@ public class DaoTest {
 	
 //	@Ignore
 	@Test
-	public void aendernWunsch(){
+	public void aendernWunsch(){ //alle werte setzen, da wunsch diese normalerweise hat
 		Wuensche w = new Wuensche();
-		w.setName("Sonnenbrille");
-		w.setBeschreibung("von Marke superTeuerUndHip");
-		w.setLink("keiner");
-		assertTrue(WuenschdwDAOImple.getInstance().aendereWunsch(54, w));
+		w.setId(62);
+		w.setName("Yogakurs");
+		w.setBeschreibung("Texti textchen");
+		w.setLink("www.link.de");
+		w.setSchenker("frei");
+		assertTrue(WuenschdwDAOImple.getInstance().aendereWunsch(w));
 		WuenschdwDAOImple.getInstance().schliesseVerbindung(WuenschdwDAOImple.getInstance().getVerbindung());
 	}
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primfaces.org/ui">
+	<h:head>
+		<meta charset="UTF-8" />
+	</h:head>
+	<h:body>
+		<h2>Detailansicht deines Wunsches</h2>
+		<h3>Du kannst die Details ändern oder den Wunsch löschen</h3>
+		<h:form>
+			<h:outputLabel for="name" value="Name: " />
+			<h:inputText id="name" value="#{bearbeitenS.speicherWunsch.name}" required="true" >
+				<f:validateLength minimum="2" maximum="30" />
+				<f:validateRegex pattern="[A-ZÄÖÜ]+.+" />
+			</h:inputText>
+			<br />
+			<h:message for="name" showSummary="false"></h:message>
+			<br/>
+			<h:outputLabel for="link" value="Link: " />
+			<h:inputText id="link" value="#{bearbeitenS.speicherWunsch.link}" >
+				<f:validateLength maximum="600" />
+			</h:inputText>
+			<br />
+			<h:message for="link" showSummary="false"></h:message>
+			<br />
+			<h:outputLabel for="beschreibung" value="Beschreibung: " />
+			<h:inputText id="beschreibung" value="#{bearbeitenS.speicherWunsch.beschreibung}" />
+			<br />
+			<h:message for="beschreibung" showSummary="false"></h:message>
+			<br />
+			<h:commandButton value="bestätigen" action="#{bearbeitenS.wunschAendernBestaetigen}"/>
+		</h:form>
+	</h:body>
+</html>

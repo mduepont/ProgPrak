@@ -14,7 +14,7 @@ public interface WuenschdwDAO {
 	public ArrayList<String> anlaesseLaden(); 
 	
 	public Wuensche speichereWunsch(int idListe, Wuensche wunsch); 
-	public boolean aendereWunsch(int idWunsch, Wuensche wunsch);
+	public boolean aendereWunsch(Wuensche wunsch);
 	public boolean loescheWunsch(int idWunsch); 
 	
 //	public ArrayList<Design> designsLaden();  

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primfaces.org/ui">
+	<h:head>
+		<meta charset="UTF-8" />
+	</h:head>
+	<h:body>
+		<h2>Übersicht deiner Wünsche</h2>
+		<h3>Hier kannst du Wünsche bearbeiten oder löschen oder neue Wünsche hinzufügen</h3>
+		<h:dataTable value="#{bearbeitenS.liste.wuensche}" border="1" var="w">
+			<h:column>
+				<f:facet name="header" >Name</f:facet>
+				#{w.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header" >Link</f:facet>
+				#{w.link}
+			</h:column>
+			<h:column>
+				<f:facet name="header" >Beschreibung</f:facet>
+				#{w.beschreibung}
+			</h:column>
+			<h:column>
+				<f:facet name="header" >Bearbeiten</f:facet>
+				<h:form>
+					<h:commandButton value="bearbeiten" action="#{bearbeitenS.bearbeitenWunsch}">
+						<f:setPropertyActionListener target="#{bearbeitenS.wunschBearb}" value="#{w}" />
+					</h:commandButton>
+				</h:form>
+			</h:column>
+		</h:dataTable>
+		<h:form>
+			<h:commandButton value="neuer Wunsch" />
+			<h:commandButton value="fertig" action="#{bearbeitenS.wuenscheAendernFertig}"/>
+		</h:form>
+		
+</h:body>
+</html>

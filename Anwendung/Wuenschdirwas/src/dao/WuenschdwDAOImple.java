@@ -497,7 +497,7 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 	}
 
 	@Override
-	public boolean aendereWunsch(int idWunsch, Wuensche wunsch) {
+	public boolean aendereWunsch(Wuensche wunsch) {
 		boolean erg = false;
 		try {
 			PreparedStatement stmaendernwunsch =
@@ -505,7 +505,7 @@ public class WuenschdwDAOImple extends DatenbankIO implements WuenschdwDAO {
 			stmaendernwunsch.setString(1, wunsch.getName());
 			stmaendernwunsch.setString(2, wunsch.getBeschreibung());
 			stmaendernwunsch.setString(3, wunsch.getLink());
-			stmaendernwunsch.setInt(4, idWunsch);
+			stmaendernwunsch.setInt(4, wunsch.getId());
 			int zeilen = stmaendernwunsch.executeUpdate();
 			if(zeilen > 0){
 				erg = true;

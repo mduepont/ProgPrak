@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
 import dao.WuenschdwDAOImple;
+import daten.Wuensche;
 import daten.Wuenschliste;
 import daten.WunschlisteErsteller;
 
@@ -26,8 +27,16 @@ public class ListeBearbeitenHandler {
 	private WunschlisteErsteller ersteller; 
 	private ArrayList<String> anlaesse;
 	private SelectItem[] anlaesseItems;
+	private Wuensche wunschBearb;
+	private Wuensche speicherWunsch;
 	
 	
+	public Wuensche getSpeicherWunsch() {
+		return speicherWunsch;
+	}
+	public void setSpeicherWunsch(Wuensche speicherWunsch) {
+		this.speicherWunsch = speicherWunsch;
+	}
 	public String getPwInfo() {
 		return pwInfo;
 	}
@@ -65,6 +74,12 @@ public class ListeBearbeitenHandler {
 		this.passwort1 = passwort;
 	}
 	
+	public Wuensche getWunschBearb() {
+		return wunschBearb;
+	}
+	public void setWunschBearb(Wuensche wunschBearb) {
+		this.wunschBearb = wunschBearb;
+	}
 	public String getPasswort2() {
 		return passwort2;
 	}
@@ -174,5 +189,25 @@ public class ListeBearbeitenHandler {
 	public String pwAendern(){
 		pwInfo = "Passwort erfolgreich geändert";
 		return ".";
+	}
+	
+	public String bearbeitenWunsch(){
+		speicherWunsch = new Wuensche();
+		speicherWunsch.setName(wunschBearb.getName());
+		speicherWunsch.setLink(wunschBearb.getLink());
+		speicherWunsch.setBeschreibung(wunschBearb.getBeschreibung());
+		speicherWunsch.setSchenker(wunschBearb.getSchenker());
+		return "ListeBearbeitenSaskiaWunsch";
+	}
+	public String wunschAendernBestaetigen(){
+		System.out.println("Wunsch bestätigen");
+		wunschBearb.setName(speicherWunsch.getName());
+		wunschBearb.setLink(speicherWunsch.getLink());
+		wunschBearb.setBeschreibung(speicherWunsch.getLink());
+		WuenschdwDAOImple.getInstance().aendereWunsch(wunschBearb);
+		return "ListeBearbeitenSaskiaWuensche";
+	}
+	public String wuenscheAendernFertig(){
+		return "ListeBearbeitenSaskiaErfolg";
 	}
 }

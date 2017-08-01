@@ -9,6 +9,8 @@
 		<meta charset="UTF-8" />
 	</h:head>
 	<h:body>
+		<h2>Erstelle eine neue Liste</h2>
+		<h3>2/3 Wünsche hinzufügen, es muss mindestens ein Wunsch angegeben werden</h3>
 		<h:form>
 			<h:outputLabel for="nameWunsch" value="Name des Wunsches: "></h:outputLabel>
 			<h:inputText id="nameWunsch" value="#{erstellenS.nameWunsch}" required="true">
@@ -34,7 +36,7 @@
 		</h:form>
 		
 			<h:dataTable value="#{erstellenS.wunschliste.wuensche}" var="w" border="1"
-					rendered="#{erstellenS.wunschliste.wuensche != null}" 
+					rendered="#{not empty erstellenS.wunschliste.wuensche}" 
 					binding="#{erstellenS.wunschtabelle}"
 					rowSelectionAllowed="true">
 			<h:column>

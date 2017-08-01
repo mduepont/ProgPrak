@@ -11,7 +11,7 @@
 	<h:body>
 		<ui:composition template="../templates/ErstellenTemplate.xhtml">
 			<ui:define name="titel">
-				NeueListe		
+				MeineListe		
 			</ui:define>
 			<ui:define name="header">
 				<ui:include src="../../WEB-INF/header.xhtml" />
@@ -20,9 +20,9 @@
 				<!-- <ui:include> -->
 				<div class="container">
         		<br />
-            	<h:outputText value="Erstelle deine eigene Liste "></h:outputText>
+            	<h:outputText value="Bearbeite deine Liste oder sieh dir die Details nocheinmal an "></h:outputText>
             	<br />
-            	<h:outputText value="Gib im zweiten Schritt mindestens einen Wunsch für deine Liste ein. "></h:outputText>
+            	<h:outputText value="Hier kannst du einen einzelnen Wunsch bearbeiten "></h:outputText>
         	</div>
 				<!-- </ui:include> -->
 			</ui:define>
@@ -62,7 +62,7 @@
 				<!-- </ui:include> -->
 			</ui:define>
 			<ui:define name="content">
-				<ui:include src="../content/ErstellenB.xhtml"></ui:include>
+				<ui:include src="../content/BearbeitenWunsch.xhtml"></ui:include>
 			</ui:define>
 			<ui:define name="footer">
 				<ui:include src="../../WEB-INF/footer.xhtml" />
