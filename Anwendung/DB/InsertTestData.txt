@@ -19,7 +19,7 @@ UPDATE ersteller SET id_ersteller = 4 where email = 'saskia@s.de';
 UPDATE ersteller SET id_ersteller = 5 where email = 'karlmagsbunt@gmx.de';
 	
 INSERT INTO wunschliste (id_ersteller, id_zugriff, name_wunschliste, anlass, ablaufdatum, listenpasswort, design_id, uberraschungsmodus)
-	VALUES ('1', '24876-f8wg-3247k', 'Xyz Hochzeit', 'Hochzeit', '2017-09-21', '6gH9ii', '1', 'false'), 
+	VALUES ('1', 'aaa1-bbb2', 'Xyz Hochzeit', 'Hochzeit', '2017-09-21', 'Test333', '1', 'false'), 
 			('2', 'fd876g-87gas5-87s8696', '18. Geburtstag von Lennart', 'Geburtstag', '2017-07-03', 'bBaA89cC', '1', 'false'), 
 			('3', '546gvg452-43g326-980h76', 'Taufe von Charleen', 'Taufe', '2017-08-18', 'abc123AB', '1', 'true');
 
@@ -36,6 +36,8 @@ INSERT INTO wunsch (name_wunsch, id_wunschliste, beschreibung, link_wunsch, sche
 	('Geld zum Führerschein', '2', 'keine', 'keiner', 'frei'),
 	('Computertasche', '2', 'am liebsten in grau oder blau', 'www.schlepp-dein-Kram.de/bags/bagLalaBlaba12', 'frei'),
 	('Toaster', '1', 'Edelstahlt und von WMF', 'www.wmf.de/sortiment/Toaster-Edelstahl', 'frei'),
+	('Kamel-Reitwanderung', '1', 'Mein aller größter Wunsch', 'www.kamel-reiten-wittner.de', 'frei'),
+	('Waffeleisen', '1', 'keine', 'keiner', 'Greta'),
 	('Tragetuch', '3', 'keine', 'keiner', 'Gabi und Ludwig'),
 	('Hipp Babybrei', '3', 'Sie mag am liebsten Aprikose-Handtuch und Schublade-Erdbeere', 'keiner', 'frei'),
 	('Entspannungskurs', '3', '3 Wochen an der Ostsee', 'www.ertragDeinKindBesser.de/kurs666', 'Gernot'),

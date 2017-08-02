@@ -12,12 +12,17 @@
 		<h2>Persönliche Liste bearbeiten</h2>
 		<h3>Was möchtest du tun?</h3>
 		<h:form>
-			<h:panelGrid columns="2" border="1">
+			<h:panelGrid columns="3" border="1">
 				<h:outputLabel value="Details der Liste bearbeiten" />
 				<h:outputLabel value="Wünsche bearbeiten" />
+				<h:outputLabel value="Diese Liste löschen" />
 				<h:commandButton value="zur Liste" action="#{bearbeitenS.zurListe}"/>
 				<h:commandButton value="zu den Wünschen" action="#{bearbeitenS.zuDenWuenschen}"/>
+				<h:commandButton value="löschen" action="#{bearbeitenS.listeLoeschen}"/>
 			</h:panelGrid>
+		</h:form>
+		<h:form>
+			<h:commandButton value="abrechen" action="/index" />
 		</h:form>
 	</h:body>
 </html>

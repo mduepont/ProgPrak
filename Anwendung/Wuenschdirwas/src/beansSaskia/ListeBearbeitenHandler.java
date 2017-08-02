@@ -6,6 +6,7 @@ import java.util.Collections;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.model.SelectItem;
 
 import dao.WuenschdwDAOImple;
@@ -29,8 +30,49 @@ public class ListeBearbeitenHandler {
 	private SelectItem[] anlaesseItems;
 	private Wuensche wunschBearb;
 	private Wuensche speicherWunsch;
+	private HtmlDataTable wunschtabelle;
+	private int indexWunsch;
+	private int listenGroesse;
+	private String nameWunsch;
+	private String link;
+	private String beschreibung;
 	
 	
+	
+	public String getNameWunsch() {
+		return nameWunsch;
+	}
+	public void setNameWunsch(String nameWunsch) {
+		this.nameWunsch = nameWunsch;
+	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
+	public String getBeschreibung() {
+		return beschreibung;
+	}
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
+	}
+	public int getListenGroesse() {
+		System.out.println("groesse liste: "+liste.getWuensche().size());
+		return liste.getWuensche().size();
+	}
+	public int getIndexWunsch() {
+		return indexWunsch;
+	}
+	public void setIndexWunsch(int indexWunsch) {
+		this.indexWunsch = indexWunsch;
+	}
+	public HtmlDataTable getWunschtabelle() {
+		return wunschtabelle;
+	}
+	public void setWunschtabelle(HtmlDataTable wunschtabelle) {
+		this.wunschtabelle = wunschtabelle;
+	}
 	public Wuensche getSpeicherWunsch() {
 		return speicherWunsch;
 	}
@@ -134,7 +176,7 @@ public class ListeBearbeitenHandler {
 		if(zugangsCode == true && passwortStimmt == true){
 			liste = WuenschdwDAOImple.getInstance().ladeWunschliste(zugangscode);
 			ersteller = WuenschdwDAOImple.getInstance().ladeErstellerId(liste.getIdErsteller());
-			return "ListeBearbeitenSaskiaB";
+			return "ListeBearbeitenSaskiaB?faces-redirect=true";
 		}
 		if(zugangsCode == true && passwortStimmt == false){
 			info = "Leider stimmt das Passwort nicht mit dem der angegebenen Liste überein";
@@ -142,14 +184,14 @@ public class ListeBearbeitenHandler {
 		if(zugangsCode == false && passwortStimmt == false){
 			info = "Leider konnten wir keinen passenden Eintrag finden";
 		}	
-		return "ListeBearbeitenSaskiaA";
+		return "ListeBearbeitenSaskiaA?faces-redirect=true";
 	}
 	
 	public String zurListe(){
-		return "ListeBearbeitenSaskiaListe";
+		return "ListeBearbeitenSaskiaListe?faces-redirect=true";
 	}
 	public String zuDenWuenschen(){
-		return "ListeBearbeitenSaskiaWuensche";
+		return "ListeBearbeitenSaskiaWuensche?faces-redirect=true";
 	}
 	public SelectItem[] getAnlaesse(){
 		SelectItem[] items = null;
@@ -167,11 +209,11 @@ public class ListeBearbeitenHandler {
 	}
 	
 	public String fertig(){
-		return "/index.xhtml";
+		return "/index.xhtml?faces-redirect=true";
 	}
 	
 	public String weiter(){
-		return "ListeBearbeitenSaskiaB";
+		return "ListeBearbeitenSaskiaB?faces-redirect=true";
 	}
 	
 	public String aendern(){
@@ -183,7 +225,7 @@ public class ListeBearbeitenHandler {
 		}
 		
 		WuenschdwDAOImple.getInstance().aenderWunschliste(liste);
-		return "ListeBearbeitenSaskiaErfolg";
+		return "ListeBearbeitenSaskiaErfolg?faces-redirect=true";
 	}
 	
 	public String pwAendern(){
@@ -197,7 +239,8 @@ public class ListeBearbeitenHandler {
 		speicherWunsch.setLink(wunschBearb.getLink());
 		speicherWunsch.setBeschreibung(wunschBearb.getBeschreibung());
 		speicherWunsch.setSchenker(wunschBearb.getSchenker());
-		return "ListeBearbeitenSaskiaWunsch";
+		indexWunsch = wunschtabelle.getRowIndex();
+		return "ListeBearbeitenSaskiaWunsch?faces-redirect=true";
 	}
 	public String wunschAendernBestaetigen(){
 		System.out.println("Wunsch bestätigen");
@@ -205,9 +248,57 @@ public class ListeBearbeitenHandler {
 		wunschBearb.setLink(speicherWunsch.getLink());
 		wunschBearb.setBeschreibung(speicherWunsch.getLink());
 		WuenschdwDAOImple.getInstance().aendereWunsch(wunschBearb);
-		return "ListeBearbeitenSaskiaWuensche";
+		return "ListeBearbeitenSaskiaWuensche?faces-redirect=true";
 	}
 	public String wuenscheAendernFertig(){
-		return "ListeBearbeitenSaskiaErfolg";
+		return "ListeBearbeitenSaskiaErfolg?faces-redirect=true";
+	}
+public String listeLoeschen(){
+		
+		return "ListeBearbeitenSaskiaLoeschen?faces-redirect=true";
+	}
+	
+	public String endgueltigLoeschen(){
+		WuenschdwDAOImple.getInstance().loescheWunschliste(liste.getIdListe());
+		System.out.println("löschen liste: "+liste.toString());
+		zugangscode = null;
+		passwort = null;
+		passwort1 = null;
+		passwort2 = null;
+		info = null;
+		pwInfo = "";
+		liste = null;
+		ersteller = null; 
+		wunschBearb = null;
+		speicherWunsch = null;
+		indexWunsch = -1;
+		return "/index?faces-redirect=true";
+	}
+	
+	public String wunschLoeschenEndg(){
+		WuenschdwDAOImple.getInstance().loescheWunsch(wunschBearb.getId());
+		liste.getWuensche().remove(indexWunsch);
+		return "ListeBearbeitenSaskiaWuensche?faces-redirect=true";
+	}
+	public String zurueckWunsch(){
+		return "ListeBearbeitenSaskiaWuensche?faces-redirect=true";
+	}
+	public String zurueckWuensche(){
+		return "ListeBearbeitenSaskiaB?faces-redirect=true";
+	}
+	public String neuerWunsch(){
+		return "ListeBearbeitenSaskiaNeu?faces-redirect=true";
+	}
+	public String speichernWunschNeu(){
+		Wuensche w = new Wuensche();
+		w.setName(nameWunsch);
+		w.setBeschreibung(beschreibung);
+		w.setLink(link);
+		WuenschdwDAOImple.getInstance().speichereWunsch(liste.getIdListe(), w);
+		liste.getWuensche().add(w);
+		setNameWunsch(null);
+		setBeschreibung(null);
+		setLink(null);
+		return "ListeBearbeitenSaskiaWuensche?faces-redirect=true";
 	}
 }

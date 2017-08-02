@@ -161,21 +161,23 @@ public class ListeErstellenHandler {
 	
 	public String weiterA(){
 		System.out.println("weiterA: "+titel+" "+anlass+" "+ablaufdatum+" "+beschreibung+".");
-		return "ListeErstellenSaskiaB";
+		return "ListeErstellenSaskiaB?faces-redirect=true";
 	}
 	
 	public String weiterB(){
 		System.out.println(wunschliste.getWuensche().toArray().toString());
-		return "ListeErstellenSaskiaC";
+		return "ListeErstellenSaskiaC?faces-redirect=true";
 	}
 	public String datenEntfernen(){
 		this.setTitel(null);
 		this.setAblaufdatum(null);
 		this.setAnlass(null);
-		wunschliste.setWuensche(null);
+		if(wunschliste != null){
+			wunschliste.setWuensche(null);
+		}
 		this.setEmail(null);
 		this.setPasswort(null);
-		return "ListeErstellenSaskiaA";
+		return "ListeErstellenSaskiaA?faces-redirect=true";
 	}
 	public String speichernWunsch(){
 		Wuensche w = new Wuensche();
@@ -194,7 +196,7 @@ public class ListeErstellenHandler {
 		setBeschreibung(null);
 		setLink(null);
 		System.out.println("speichernWunsch, länge liste: "+wunschliste.getWuensche().size());
-		return "ListeErstellenSaskiaB.xhtml";
+		return "ListeErstellenSaskiaB.xhtml?faces-redirect=true";
 	}
 	
 	public String listeSpeichern(){
@@ -211,7 +213,8 @@ public class ListeErstellenHandler {
 		System.out.println(wunschliste.toString());
 		System.out.println(wunschliste.toString());
 		linkListe = WuenschdwDAOImple.getInstance().speichereWunschliste(wunschliste);
-		return "SpeichernErfolgreich";
+		wunschliste = null;
+		return "SpeichernErfolgreich?faces-redirect=true";
 	}
 	
 	public void loeschenWunsch(){
@@ -226,4 +229,6 @@ public class ListeErstellenHandler {
 		wunschliste.getWuensche().remove(index);
 		System.out.println("jsf Index: "+index);
 	}
+	
+	
 }

@@ -39,7 +39,11 @@
 			<h:message for="datum" showSummary="false"></h:message>
 			<br/>
 			<h:commandButton value="weiter" action="#{erstellenS.weiterA}"></h:commandButton>
-			<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" rendered="#{(erstellenS.titel != null) || (erstellenS.ablaufdatum != null)}"/>
+			
+		</h:form>
+		<h:form>
+		<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" rendered="#{(erstellenS.titel != null) || (erstellenS.ablaufdatum != null)}"/><br/>
+			<h:commandButton value="abrechen" action="/index" />
 		</h:form>
 	</h:body>
 </html>

@@ -11,6 +11,7 @@
 	<h:body>
 		<h2>Detailansicht deines Wunsches</h2>
 		<h3>Du kannst die Details ändern oder den Wunsch löschen</h3>
+		<h3>Erinnerung: deine Liste muss mindestens einen Wunsch beinhalten</h3>
 		<h:form>
 			<h:outputLabel for="name" value="Name: " />
 			<h:inputText id="name" value="#{bearbeitenS.speicherWunsch.name}" required="true" >
@@ -33,6 +34,11 @@
 			<h:message for="beschreibung" showSummary="false"></h:message>
 			<br />
 			<h:commandButton value="bestätigen" action="#{bearbeitenS.wunschAendernBestaetigen}"/>
+			<h:commandButton value="Wunsch löschen" action="#{bearbeitenS.wunschLoeschenEndg}" rendered="#{bearbeitenS.listenGroesse > 1}"/>
+		</h:form>
+		<h:form>
+			<h:commandButton value="zurück" action="#{bearbeitenS.zurueckWunsch}" />
+			<h:commandButton value="abrechen" action="/index" />
 		</h:form>
 	</h:body>
 </html>

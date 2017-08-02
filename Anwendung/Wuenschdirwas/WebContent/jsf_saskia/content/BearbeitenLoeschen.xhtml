@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primfaces.org/ui">
+	<h:head>
+		<meta charset="UTF-8" />
+	</h:head>
+	<h:body>
+		<h2>Persönliche Liste löschen</h2>
+		<h3>Bist du sicher, dass du diese Liste endgültig löschen möchtst?</h3>
+		<h:form>
+			<h:outputText value="Durch Drücken von bestätigen wird diese Liste gelöscht." /><br/>
+			<h:outputText value="Die Liste kann danach nicht mehr aufgerufen oder wieder hergestellt werden!"/><br/>
+			<h:commandButton value="löschen bestätigen" action="#{bearbeitenS.endgueltigLoeschen}" />
+		</h:form>
+		<h:form>
+			<h:commandButton value="zurück" action="#{bearbeitenS.zurueckWuensche}" />
+			<h:commandButton value="abrechen" action="/index" />
+		</h:form>
+	</h:body>
+</html>

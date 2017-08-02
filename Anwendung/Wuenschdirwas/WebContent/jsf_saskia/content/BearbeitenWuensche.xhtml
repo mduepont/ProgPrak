@@ -11,7 +11,9 @@
 	<h:body>
 		<h2>Übersicht deiner Wünsche</h2>
 		<h3>Hier kannst du Wünsche bearbeiten oder löschen oder neue Wünsche hinzufügen</h3>
-		<h:dataTable value="#{bearbeitenS.liste.wuensche}" border="1" var="w">
+		<h3>Erinnerung: deine Liste muss mindestens einen Wunsch beinhalten</h3>
+		<h:dataTable value="#{bearbeitenS.liste.wuensche}" border="1" var="w"
+		binding="#{bearbeitenS.wunschtabelle}">
 			<h:column>
 				<f:facet name="header" >Name</f:facet>
 				#{w.name}
@@ -34,9 +36,12 @@
 			</h:column>
 		</h:dataTable>
 		<h:form>
-			<h:commandButton value="neuer Wunsch" />
+			<h:commandButton value="neuer Wunsch" action="#{bearbeitenS.neuerWunsch}"/>
 			<h:commandButton value="fertig" action="#{bearbeitenS.wuenscheAendernFertig}"/>
 		</h:form>
-		
+		<h:form>
+			<h:commandButton value="zurück" action="#{bearbeitenS.zurueckWuensche}" />
+			<h:commandButton value="abrechen" action="/index" />
+		</h:form>
 </h:body>
 </html>

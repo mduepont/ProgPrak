@@ -31,7 +31,7 @@
 			</h:inputText><br/>
 			<h:message for="link" showSummary="false"></h:message>
 			<br/>
-			<h:commandButton value="speichern" action="#{erstellenS.speichernWunsch}" />
+			<h:commandButton value="Wunsch speichern" action="#{erstellenS.speichernWunsch}" />
 			
 		</h:form>
 		
@@ -63,6 +63,7 @@
 		<h:commandButton value="weiter" action="#{erstellenS.weiterB}" rendered="#{erstellenS.wunschliste.getWuensche().size() > 0}"/>
 		<h:commandButton value="Daten entfernen" action="#{erstellenS.datenEntfernen}" rendered="#{erstellenS.wunschliste.wuensche != null}"/>
 		<br /> <h:commandButton value="zurück" action="ListeErstellenSaskiaA" />
+		<h:commandButton value="abrechen" action="/index" />
 	</h:form>
 	</h:body>
 </html>

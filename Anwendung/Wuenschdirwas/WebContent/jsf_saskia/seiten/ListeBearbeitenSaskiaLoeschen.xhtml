@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primfaces.org/ui">
+	<h:head>
+		<meta charset="UTF-8" />
+	</h:head>
+	<h:body>
+		<ui:composition template="../templates/ErstellenTemplate.xhtml">
+			<ui:define name="titel">
+				MeineListe		
+			</ui:define>
+			<ui:define name="header">
+				<ui:include src="../../WEB-INF/header.xhtml" />
+			</ui:define>
+			<ui:define name="maincontent" >
+				<!-- <ui:include> -->
+				<div class="container">
+        		<br />
+            	<h:outputText value="Bearbeite deine Liste oder sieh dir die Details nocheinmal an "></h:outputText>
+            	<br />
+            	<h:outputText value="Hier kannst du deine bestehende Liste löschen. "></h:outputText>
+        	</div>
+				<!-- </ui:include> -->
+			</ui:define>
+			<ui:define name="category">
+				<!-- <ui:include > -->
+						<h:outputLink value="../../../geburt.xhtml">
+							<h:graphicImage class="icons" library="images" name="geburt.png" title="Geburt" />
+						</h:outputLink>
+			        	<h:outputLink value="geburtstag.xhtml">
+							<h:graphicImage class="icons" library="images" name="geburtstag.png" title="Geburtstag" />
+						</h:outputLink>
+						<h:outputLink value="jubilaeum.xhtml">
+							<h:graphicImage class="icons" library="images" name="jubilaeum.png" title="Jubiläum" />
+						</h:outputLink>
+						<h:outputLink value="taufe.xhtml">
+							<h:graphicImage class="icons" library="images" name="taufe.png" title="Taufe"/>
+						</h:outputLink>
+						<h:outputLink value="kommunion.xhtml">
+							<h:graphicImage class="icons" library="images" name="kommunion.png" title="Kommunion"/>
+						</h:outputLink>
+						<h:outputLink value="konfirmation.xhtml">
+							<h:graphicImage class="icons" library="images" name="konfirmation.png" title="Konfirmation" />
+						</h:outputLink>
+						<h:outputLink value="henna.xhtml">
+							<h:graphicImage class="icons" library="images" name="henna.png" title="Henna" />
+						</h:outputLink>
+						<h:outputLink value="hochzeit.xhtml">
+							<h:graphicImage class="icons" library="images" name="hochzeit.png" title="Hochzeit" />
+						</h:outputLink>
+						<h:outputLink value="weihnachten.xhtml">
+							<h:graphicImage class="icons" library="images" name="weihnachten.png" title="Weihnachten" />
+						</h:outputLink>
+						<h:outputLink value="zuckerfest.xhtml">
+							<h:graphicImage class="icons" library="images" name="zuckerfest.png" title="Zuckerfest" />
+						</h:outputLink>
+        
+				<!-- </ui:include> -->
+			</ui:define>
+			<ui:define name="content">
+				<ui:include src="../content/BearbeitenLoeschen.xhtml"></ui:include>
+			</ui:define>
+			<ui:define name="footer">
+				<ui:include src="../../WEB-INF/footer.xhtml" />
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>
